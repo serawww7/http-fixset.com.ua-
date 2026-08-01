@@ -13,9 +13,16 @@
 ## Структура
 
 ```
-index.html
-css/style.css
-js/script.js
+index.html          → theme-1
+design-2.html       → theme-2
+design-3.html       → theme-3
+css/
+  common.css        → layout, grid, адаптив, структура секцій, форми
+  theme-1.css
+  theme-2.css
+  theme-3.css
+js/
+  script.js         → спільний JS
 images/
 fonts/
 icons/
@@ -23,21 +30,17 @@ README.md
 .gitignore
 ```
 
+HTML-сторінки мають однакову розмітку, один `script.js`, одні інтеграції Crisp і Binotel. Відрізняються лише підключеною темою CSS.
+
 ## Запуск
 
-Відкрийте `index.html` у браузері (подвійний клік або File → Open). Сервер не потрібен.
+Відкрийте потрібний HTML у браузері:
 
-## Секції
+- `index.html` — тема 1
+- `design-2.html` — тема 2
+- `design-3.html` — тема 3
 
-1. Header — логотип, телефон, CTA
-2. Hero — головний заголовок і форма заявки
-3. Benefits — безкоштовний ІТ-аудит
-4. Services — регламент профілактики
-5. Comparison — порівняння з штатним сисадміном
-6. Pricing — тарифи
-7. Testimonials — відгуки
-8. CTA — фінальний заклик
-9. Footer — контакти та соцмережі
+Сервер не потрібен.
 
 ## Контакти
 

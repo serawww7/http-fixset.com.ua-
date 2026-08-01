@@ -1,0 +1,182 @@
+/* FIXSET — Theme 2: steel / navy corporate */
+
+:root {
+  --radius: 2px;
+  --font-sans: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-size-base: 1.05rem;
+  --line-height-base: 1.65;
+
+  --color-white: #f7f8fa;
+  --color-warm: #e8ecf1;
+  --color-graphite: #1e2a3a;
+  --color-dark: #0f1724;
+  --color-text: #152033;
+  --color-muted: #5a6a7d;
+  --color-line: #c5ced8;
+  --color-accent: #2f5f8a;
+  --color-accent-hover: #244c6f;
+  --color-on-accent: #ffffff;
+  --color-on-dark: #eef2f6;
+  --color-on-dark-muted: #9aa8b8;
+  --color-placeholder: #8a96a5;
+  --color-footer-muted: #7a8796;
+
+  --header-bg: #f7f8fa;
+  --nav-link-transform: none;
+  --nav-link-tracking: 0.01em;
+  --nav-link-size: 0.9rem;
+  --nav-link-weight: 500;
+  --section-line-dark: rgba(255, 255, 255, 0.12);
+  --section-line-dark-soft: rgba(255, 255, 255, 0.1);
+}
+
+body {
+  letter-spacing: 0.005em;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-weight: 800;
+}
+
+/* Buttons */
+
+.btn {
+  border-radius: var(--radius);
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.8125rem;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-on-accent);
+  text-decoration: none;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.btn--small {
+  letter-spacing: 0.04em;
+}
+
+/* Interactive accents */
+
+.site-nav__list a:hover,
+.site-nav__list a:focus-visible,
+.header__phone:hover,
+.header__phone:focus-visible,
+.footer__contacts a:hover,
+.footer__social-list a:hover,
+.footer__contacts a:focus-visible,
+.footer__social-list a:focus-visible {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.site-header {
+  border-bottom-width: 2px;
+  border-bottom-color: var(--color-graphite);
+}
+
+.hero {
+  background: var(--color-white);
+}
+
+.hero::after {
+  border-left: 3px solid var(--color-accent);
+}
+
+.lead-form {
+  border-top-color: var(--color-graphite);
+}
+
+.lead-form__input {
+  border-radius: var(--radius);
+  background: #ffffff;
+}
+
+/* Cards / borders */
+
+.pricing__list {
+  border-color: var(--color-graphite);
+  background: #ffffff;
+}
+
+.pricing__item {
+  background: #ffffff;
+  border-right-color: var(--color-line);
+}
+
+.pricing__item--featured {
+  background: #ffffff;
+  box-shadow: inset 3px 0 0 0 var(--color-accent);
+}
+
+.pricing__features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  margin-top: -2px;
+  background: var(--color-accent);
+}
+
+.comparison__wrapper {
+  border-top-width: 3px;
+  border-top-color: var(--color-accent);
+}
+
+.testimonials__list {
+  border-top-width: 2px;
+}
+
+.testimonials__item:first-child p {
+  font-weight: 600;
+}
+
+.cta {
+  border-top-width: 3px;
+  background: var(--color-dark);
+}
+
+.cta .btn {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  text-transform: uppercase;
+}
+
+.cta .btn:hover,
+.cta .btn:focus-visible {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-on-accent);
+}
+
+.site-footer {
+  background: #0b121c;
+}
