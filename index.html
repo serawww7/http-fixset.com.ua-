@@ -11,7 +11,7 @@
   <script>
     (function () {
       var key = "fixset-theme";
-      var allowed = { "theme-1": true, "theme-2": true, "theme-3": true };
+      var allowed = { "theme-1": true, "theme-2": true, "theme-3": true, "theme-4": true, "theme-5": true };
       try {
         var saved = localStorage.getItem(key);
         if (saved && allowed[saved]) {
@@ -341,11 +341,19 @@
       </button>
       <button type="button" class="design-demo__btn" data-theme="theme-2" aria-pressed="false">
         <span class="design-demo__btn-name">Theme 2</span>
-        <span class="design-demo__btn-concept">Concept B — Tech</span>
+        <span class="design-demo__btn-concept">Corporate Trust</span>
       </button>
       <button type="button" class="design-demo__btn" data-theme="theme-3" aria-pressed="false">
         <span class="design-demo__btn-name">Theme 3</span>
-        <span class="design-demo__btn-concept">Concept C — Premium</span>
+        <span class="design-demo__btn-concept">Apple Style</span>
+      </button>
+      <button type="button" class="design-demo__btn" data-theme="theme-4" aria-pressed="false">
+        <span class="design-demo__btn-name">Theme 4</span>
+        <span class="design-demo__btn-concept">Enterprise</span>
+      </button>
+      <button type="button" class="design-demo__btn" data-theme="theme-5" aria-pressed="false">
+        <span class="design-demo__btn-name">Theme 5</span>
+        <span class="design-demo__btn-concept">Human First</span>
       </button>
     </div>
   </aside>

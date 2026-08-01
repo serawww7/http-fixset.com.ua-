@@ -1,0 +1,397 @@
+/* FIXSET — Theme 5 / Human First
+   Акцент на людях. Емоція: «Ми забрали ваші проблеми.» */
+
+:root {
+  --radius: 14px;
+  --font-sans: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-size-base: 1.0625rem;
+  --line-height-base: 1.7;
+
+  --color-white: #fffdf9;
+  --color-warm: #f3ebe2;
+  --color-graphite: #2c2a28;
+  --color-dark: #1f1d1b;
+  --color-text: #2c2a28;
+  --color-muted: #6f6860;
+  --color-line: #ddd3c7;
+  --color-accent: #4f6f5a;
+  --color-accent-hover: #3f5948;
+  --color-on-accent: #fffdf9;
+  --color-on-dark: #f7f1ea;
+  --color-on-dark-muted: #b5aaa0;
+  --color-placeholder: #9a9188;
+  --color-footer-muted: #8a8178;
+
+  --header-bg: rgba(255, 253, 249, 0.94);
+  --nav-link-transform: none;
+  --nav-link-tracking: 0;
+  --nav-link-size: 0.95rem;
+  --nav-link-weight: 500;
+  --section-line-dark: rgba(247, 241, 234, 0.16);
+  --section-line-dark-soft: rgba(247, 241, 234, 0.12);
+}
+
+body {
+  background: var(--color-white);
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  line-height: 1.08;
+}
+
+h2 {
+  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+}
+
+/* Soft human buttons */
+
+.btn {
+  border-radius: var(--radius);
+  border: 1px solid var(--color-accent);
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-weight: 600;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: var(--color-on-accent);
+  text-decoration: none;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-text);
+  border-color: var(--color-line);
+}
+
+.btn--outline:hover,
+.btn--outline:focus-visible {
+  background: var(--color-warm);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.site-nav__list a:hover,
+.site-nav__list a:focus-visible,
+.header__phone:hover,
+.header__phone:focus-visible,
+.footer__contacts a:hover,
+.footer__social-list a:hover,
+.footer__contacts a:focus-visible,
+.footer__social-list a:focus-visible {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.site-header {
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Hero — human SVG scene */
+
+.hero {
+  background: var(--color-warm);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+}
+
+.hero__inner {
+  padding: 4rem clamp(1.25rem, 4vw, 3.5rem);
+}
+
+.hero__content {
+  width: min(100%, 30rem);
+}
+
+.hero__lead {
+  font-size: 1.15rem;
+}
+
+.hero__lead::after {
+  content: "Ми забрали ваші проблеми.";
+  display: block;
+  margin-top: 1.35rem;
+  color: var(--color-accent);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.hero::after {
+  background-color: #f6f1ea;
+  background-image: url("../images/concept-human.svg");
+  background-size: min(94%, 540px) auto;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  border-left: none;
+  min-height: 26rem;
+}
+
+.lead-form {
+  border-top: none;
+  margin-top: 1.25rem;
+  padding: 0;
+  gap: 0.75rem;
+}
+
+.lead-form__input {
+  border-radius: var(--radius);
+  background: #ffffff;
+  border-color: var(--color-line);
+}
+
+/* Benefits — conversational rows */
+
+.benefits {
+  background: var(--color-white);
+  padding: 5rem 0;
+}
+
+.benefits .container {
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.benefits h2 {
+  position: static;
+  max-width: 22rem;
+  text-align: left;
+}
+
+.benefits__list {
+  border-top: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.benefits__item {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: #ffffff;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.benefits__item::before {
+  display: none;
+}
+
+.benefits__item h3,
+.benefits__item p {
+  grid-column: auto;
+  max-width: none;
+}
+
+.benefits .section-cta {
+  grid-column: 1;
+  text-align: left;
+}
+
+/* Services — people care, warm dark */
+
+.services {
+  background: var(--color-graphite);
+  padding: 5.5rem 0;
+}
+
+.services h2 {
+  max-width: 20rem;
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+.services__list {
+  grid-template-columns: 1fr 1fr;
+  gap: 0 2rem;
+}
+
+.services__item {
+  padding: 1.5rem 0;
+}
+
+/* Comparison */
+
+.comparison {
+  background: var(--color-warm);
+}
+
+.comparison h2 {
+  max-width: 22rem;
+}
+
+.comparison__wrapper {
+  border: none;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 1px 0 rgba(44, 42, 40, 0.06);
+}
+
+.comparison__table thead th {
+  background: var(--color-graphite);
+  color: var(--color-on-dark);
+  border-bottom: none;
+}
+
+.comparison__table thead th:nth-child(2) {
+  color: #b7d0c0;
+}
+
+.comparison__table tbody th {
+  background: #faf6f1;
+}
+
+.comparison__table tbody td:first-of-type {
+  border-left: 3px solid var(--color-accent);
+}
+
+/* Pricing — friendly cards */
+
+.pricing {
+  background: var(--color-white);
+}
+
+.pricing__list {
+  border: none;
+  gap: 1rem;
+  background: transparent;
+}
+
+.pricing__item {
+  border: 1px solid var(--color-line);
+  border-right: 1px solid var(--color-line);
+  border-radius: var(--radius);
+  background: #ffffff;
+  padding: 1.75rem;
+}
+
+.pricing__item:last-child {
+  border-right: 1px solid var(--color-line);
+}
+
+.pricing__item--featured {
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 30px rgba(79, 111, 90, 0.12);
+  background: #ffffff;
+}
+
+.pricing__features li {
+  padding-left: 1.1rem;
+}
+
+.pricing__features li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+/* Testimonials — human voices */
+
+.testimonials {
+  background: var(--color-warm);
+  padding: 5.5rem 0;
+}
+
+.testimonials h2 {
+  max-width: 20rem;
+}
+
+.testimonials__list {
+  border-top: none;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.testimonials__item,
+.testimonials__item:first-child {
+  grid-row: auto;
+  border: none;
+  border-right: none;
+  padding: 0;
+}
+
+.testimonials__item blockquote {
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-line);
+}
+
+.testimonials__item:first-child p {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+.testimonials__item:not(:first-child) p {
+  font-size: 1.05rem;
+}
+
+.cta {
+  background: var(--color-accent);
+  border-top: none;
+  color: var(--color-on-accent);
+}
+
+.cta h2 {
+  color: var(--color-on-accent);
+}
+
+.cta__inner > p {
+  color: rgba(255, 253, 249, 0.82);
+}
+
+.cta .lead-form__input {
+  background: #ffffff;
+}
+
+.cta .btn {
+  background: var(--color-dark);
+  border-color: var(--color-dark);
+  color: var(--color-on-dark);
+}
+
+.cta .btn:hover,
+.cta .btn:focus-visible {
+  background: #000;
+  border-color: #000;
+  color: var(--color-on-dark);
+}
+
+.site-footer {
+  background: var(--color-dark);
+}
+
+@media (max-width: 900px) {
+  .benefits__list,
+  .testimonials__list {
+    grid-template-columns: 1fr;
+  }
+
+  .hero::after {
+    background-size: min(90%, 420px) auto;
+    min-height: 18rem;
+  }
+
+  .pricing__list {
+    gap: 0.75rem;
+  }
+
+  .pricing__item {
+    border-bottom: 1px solid var(--color-line);
+  }
+}

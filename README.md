@@ -8,39 +8,37 @@
 - CSS3
 - JavaScript (ES6)
 
-Без фреймворків, без зовнішніх бібліотек, без серверної частини.
-
 ## Структура
 
 ```
 index.html
 css/
-  common.css      → layout і структура
-  theme-1.css     → Concept A — Corporate
-  theme-2.css     → Concept B — Tech
-  theme-3.css     → Concept C — Premium
-  demo.css        → панель демонстрації тем
-js/
-  script.js
+  common.css
+  theme-1.css   → Concept A — Corporate (базовий)
+  theme-2.css   → Corporate Trust
+  theme-3.css   → Apple Style
+  theme-4.css   → Enterprise
+  theme-5.css   → Human First
+  demo.css
+js/script.js
 images/
-fonts/
-icons/
 ```
 
 ## Варіанти дизайну
 
-На сторінці є панель «Варіант дизайну» (правий верхній кут).  
-Перемикає `theme-*.css` без перезавантаження і зберігає вибір у `localStorage`.
+Панель «Варіант дизайну» перемикає теми без перезавантаження і зберігає вибір у `localStorage`.
 
-| Theme | Concept | Характер |
-|-------|---------|----------|
-| Theme 1 | A — Corporate | Світлий, строгий, довіра |
-| Theme 2 | B — Tech | Технологічний, темніші акценти |
-| Theme 3 | C — Premium | Мінімалізм, статус, експертність |
+| Theme | Концепція | Історія |
+|-------|-----------|---------|
+| 1 | Corporate | Базовий корпоративний стиль |
+| 2 | Corporate Trust | Довіра власників бізнесу, документи/процеси |
+| 3 | Apple Style | Мінімалізм, повітря, велика типографіка |
+| 4 | Enterprise | Контраст, великі цифри, інфографіка |
+| 5 | Human First | Люди, емоція «ми забрали проблеми» |
 
 ## Запуск
 
-Відкрийте `index.html` у браузері. Сервер не потрібен.
+Відкрийте `index.html` у браузері.
 
 ## Контакти
 

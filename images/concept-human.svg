@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 520" role="img" aria-label="N48 72V;L=5=V 2V4 1N@>:@0BVW">
+  <rect width="640" height="520" fill="#f6f1ea"/>
+  <ellipse cx="320" cy="455" rx="210" ry="18" fill="#e5ddd2"/>
+
+  <!-- person left: calm, coffee -->
+  <circle cx="210" cy="168" r="36" fill="#2c2a28"/>
+  <path d="M160 250c8-42 30-62 50-62s42 20 50 62" fill="#3d3a36"/>
+  <rect x="168" y="248" width="84" height="120" rx="18" fill="#4f6f5a"/>
+  <rect x="248" y="270" width="34" height="54" rx="10" fill="#d8cfc4"/>
+  <rect x="278" y="292" width="28" height="34" rx="6" fill="#ffffff" stroke="#2c2a28" stroke-width="2"/>
+  <path d="M286 300h12M286 310h12M286 320h8" stroke="#9a9288" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- person right: relaxed gesture -->
+  <circle cx="430" cy="160" r="36" fill="#2c2a28"/>
+  <path d="M380 242c8-42 30-62 50-62s42 20 50 62" fill="#3d3a36"/>
+  <rect x="388" y="240" width="84" height="120" rx="18" fill="#2c2a28"/>
+  <path d="M472 270c28 8 42 28 46 48" fill="none" stroke="#2c2a28" stroke-width="16" stroke-linecap="round"/>
+
+  <!-- floating paperwork dissolving -->
+  <g opacity="0.9">
+    <rect x="90" y="90" width="70" height="88" rx="3" fill="#ffffff" stroke="#b9aea2" stroke-width="1.5" transform="rotate(-12 125 134)"/>
+    <path d="M105 70l8-18 10 6-6 16z" fill="#c45c26" opacity="0.35"/>
+    <rect x="480" y="78" width="70" height="88" rx="3" fill="#ffffff" stroke="#b9aea2" stroke-width="1.5" transform="rotate(10 515 122)"/>
+    <path d="M545 58l10-16 8 8-8 16z" fill="#c45c26" opacity="0.3"/>
+  </g>
+
+  <!-- calm message bar -->
+  <rect x="170" y="400" width="300" height="44" rx="22" fill="#2c2a28"/>
+  <text x="320" y="427" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="600" fill="#f6f1ea">8 701@0;8 20HV ?@>1;5<8</text>
+</svg>
