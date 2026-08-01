@@ -13,34 +13,34 @@
 ## Структура
 
 ```
-index.html          → theme-1
-design-2.html       → theme-2
-design-3.html       → theme-3
+index.html
 css/
-  common.css        → layout, grid, адаптив, структура секцій, форми
-  theme-1.css
-  theme-2.css
-  theme-3.css
+  common.css      → layout і структура
+  theme-1.css     → Concept A — Corporate
+  theme-2.css     → Concept B — Tech
+  theme-3.css     → Concept C — Premium
+  demo.css        → панель демонстрації тем
 js/
-  script.js         → спільний JS
+  script.js
 images/
 fonts/
 icons/
-README.md
-.gitignore
 ```
 
-HTML-сторінки мають однакову розмітку, один `script.js`, одні інтеграції Crisp і Binotel. Відрізняються лише підключеною темою CSS.
+## Варіанти дизайну
+
+На сторінці є панель «Варіант дизайну» (правий верхній кут).  
+Перемикає `theme-*.css` без перезавантаження і зберігає вибір у `localStorage`.
+
+| Theme | Concept | Характер |
+|-------|---------|----------|
+| Theme 1 | A — Corporate | Світлий, строгий, довіра |
+| Theme 2 | B — Tech | Технологічний, темніші акценти |
+| Theme 3 | C — Premium | Мінімалізм, статус, експертність |
 
 ## Запуск
 
-Відкрийте потрібний HTML у браузері:
-
-- `index.html` — тема 1
-- `design-2.html` — тема 2
-- `design-3.html` — тема 3
-
-Сервер не потрібен.
+Відкрийте `index.html` у браузері. Сервер не потрібен.
 
 ## Контакти
 

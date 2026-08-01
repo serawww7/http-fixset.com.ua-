@@ -6,7 +6,20 @@
   <meta name="description" content="FIXSET — ІТ-супровід малого бізнесу. Швидка технічна підтримка та повний спектр ІТ послуг по всій Україні.">
   <title>FIXSET — ІТ-супровід малого бізнесу | Вся Україна</title>
   <link rel="stylesheet" href="css/common.css">
-  <link rel="stylesheet" href="css/theme-1.css">
+  <link id="theme-css" rel="stylesheet" href="css/theme-1.css">
+  <link rel="stylesheet" href="css/demo.css">
+  <script>
+    (function () {
+      var key = "fixset-theme";
+      var allowed = { "theme-1": true, "theme-2": true, "theme-3": true };
+      try {
+        var saved = localStorage.getItem(key);
+        if (saved && allowed[saved]) {
+          document.getElementById("theme-css").setAttribute("href", "css/" + saved + ".css");
+        }
+      } catch (e) {}
+    })();
+  </script>
   <script type="text/javascript">
     window.$crisp = [];
     window.CRISP_WEBSITE_ID = "9c600460-bab5-43ec-adca-c704c721fcd6";
@@ -318,6 +331,24 @@
       <p class="footer__copy">&copy; 2026 FIXSET. Всі права захищено. Безперебійна робота вашого бізнесу.</p>
     </div>
   </footer>
+
+  <aside class="design-demo" aria-label="Варіант дизайну">
+    <p class="design-demo__title">Варіант дизайну</p>
+    <div class="design-demo__actions" role="group" aria-label="Концепції оформлення">
+      <button type="button" class="design-demo__btn" data-theme="theme-1" aria-pressed="true">
+        <span class="design-demo__btn-name">Theme 1</span>
+        <span class="design-demo__btn-concept">Concept A — Corporate</span>
+      </button>
+      <button type="button" class="design-demo__btn" data-theme="theme-2" aria-pressed="false">
+        <span class="design-demo__btn-name">Theme 2</span>
+        <span class="design-demo__btn-concept">Concept B — Tech</span>
+      </button>
+      <button type="button" class="design-demo__btn" data-theme="theme-3" aria-pressed="false">
+        <span class="design-demo__btn-name">Theme 3</span>
+        <span class="design-demo__btn-concept">Concept C — Premium</span>
+      </button>
+    </div>
+  </aside>
 
   <script src="js/script.js"></script>
   <script src="https://widgets.binotel.com/getcall/widgets/45l2x28b6jim9mr2se3p.js" async></script>

@@ -1,6 +1,57 @@
 (() => {
   'use strict';
 
+  const THEME_KEY = 'fixset-theme';
+  const THEMES = {
+    'theme-1': 'css/theme-1.css',
+    'theme-2': 'css/theme-2.css',
+    'theme-3': 'css/theme-3.css',
+  };
+
+  const themeLink = document.querySelector('#theme-css');
+  const themeButtons = document.querySelectorAll('[data-theme]');
+
+  const getSavedTheme = () => {
+    try {
+      const saved = localStorage.getItem(THEME_KEY);
+      return THEMES[saved] ? saved : 'theme-1';
+    } catch (error) {
+      return 'theme-1';
+    }
+  };
+
+  const setActiveButtons = (themeId) => {
+    themeButtons.forEach((button) => {
+      const isActive = button.getAttribute('data-theme') === themeId;
+      button.setAttribute('aria-pressed', String(isActive));
+    });
+  };
+
+  const applyTheme = (themeId, persist) => {
+    if (!themeLink || !THEMES[themeId]) return;
+
+    themeLink.setAttribute('href', THEMES[themeId]);
+    setActiveButtons(themeId);
+
+    if (persist) {
+      try {
+        localStorage.setItem(THEME_KEY, themeId);
+      } catch (error) {
+        /* ignore quota / private mode */
+      }
+    }
+  };
+
+  if (themeLink && themeButtons.length) {
+    applyTheme(getSavedTheme(), false);
+
+    themeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        applyTheme(button.getAttribute('data-theme'), true);
+      });
+    });
+  }
+
   const navToggle = document.querySelector('.nav-toggle');
   const siteNav = document.querySelector('#site-nav');
   const navLinks = siteNav ? siteNav.querySelectorAll('a') : [];
