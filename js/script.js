@@ -1,36 +1,6 @@
 (() => {
   'use strict';
 
-  const navToggle = document.querySelector('.nav-toggle');
-  const siteNav = document.querySelector('#site-nav');
-  const navLinks = siteNav ? siteNav.querySelectorAll('a') : [];
-
-  const setNavOpen = (isOpen) => {
-    if (!navToggle || !siteNav) return;
-
-    siteNav.classList.toggle('is-open', isOpen);
-    navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.setAttribute(
-      'aria-label',
-      isOpen ? 'Закрити меню' : 'Відкрити меню'
-    );
-  };
-
-  if (navToggle && siteNav) {
-    navToggle.addEventListener('click', () => {
-      const isOpen = !siteNav.classList.contains('is-open');
-      setNavOpen(isOpen);
-    });
-
-    navLinks.forEach((link) => {
-      link.addEventListener('click', () => setNavOpen(false));
-    });
-
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape') setNavOpen(false);
-    });
-  }
-
   const isValidPhone = (value) => {
     const digits = value.replace(/\D/g, '');
     return digits.length >= 10 && digits.length <= 13;
@@ -39,15 +9,12 @@
   const showMessage = (form, text, type) => {
     const message = form.querySelector('.lead-form__message');
     if (!message) return;
-
     message.hidden = false;
     message.textContent = text;
     message.classList.remove('is-error', 'is-success');
     message.classList.add(type === 'error' ? 'is-error' : 'is-success');
   };
 
-  const MAILTO = 'fixsetua@gmail.com';
-  const MAIL_SUBJECT = 'Заявка із сайту';
   const forms = document.querySelectorAll('[data-lead-form]');
 
   forms.forEach((form) => {
@@ -74,20 +41,7 @@
       }
 
       input.classList.remove('is-invalid');
-
-      const body = `Телефон: ${phone}`;
-      const mailtoUrl =
-        `mailto:${MAILTO}` +
-        `?subject=${encodeURIComponent(MAIL_SUBJECT)}` +
-        `&body=${encodeURIComponent(body)}`;
-
-      showMessage(
-        form,
-        'Відкриваємо поштовий клієнт для відправки заявки…',
-        'success'
-      );
-
-      window.location.href = mailtoUrl;
+      showMessage(form, 'Дякуємо! Ми звʼяжемося з вами найближчим часом.', 'success');
       form.reset();
     });
 

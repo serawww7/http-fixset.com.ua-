@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="FIXSET — ІТ-супровід малого бізнесу. Швидка технічна підтримка та повний спектр ІТ послуг по всій Україні.">
   <title>FIXSET — ІТ-супровід малого бізнесу | Вся Україна</title>
   <link rel="stylesheet" href="css/style.css">
   <script type="text/javascript">
@@ -19,35 +18,16 @@
   </script>
 </head>
 <body>
+
   <header>
     <div class="container header-content">
-      <a href="#hero" class="logo" aria-label="FIXSET — на головну">
+      <a href="#hero" class="logo">
         <img src="images/logoFIX.webp" alt="FixSet Logo">
       </a>
-
-      <button
-        class="nav-toggle"
-        type="button"
-        aria-controls="site-nav"
-        aria-expanded="false"
-        aria-label="Відкрити меню"
-      >
-        <span class="nav-toggle__bar"></span>
-        <span class="nav-toggle__bar"></span>
-        <span class="nav-toggle__bar"></span>
-      </button>
-
-      <nav id="site-nav" class="header-nav" aria-label="Основна навігація">
-        <ul class="header-nav__list">
-          <li><a href="#audit">Аудит</a></li>
-          <li><a href="#reglament">Послуги</a></li>
-          <li><a href="#comparison">Порівняння</a></li>
-          <li><a href="#tariffs">Тарифи</a></li>
-          <li><a href="#testimonials">Відгуки</a></li>
-        </ul>
+      <div>
         <a href="tel:+380674705737" class="nav-phone">📞 067 470 57 37</a>
         <a href="#audit" class="btn header-cta-btn">Замовити Аудит</a>
-      </nav>
+      </div>
     </div>
   </header>
 
@@ -59,13 +39,13 @@
           <p>Швидка технічна підтримка та повний спектр ІТ послуг для малого бізнесу.</p>
           <form class="lead-form" data-lead-form novalidate>
             <label class="visually-hidden" for="hero-phone">Ваш номер телефону</label>
-            <input id="hero-phone" type="tel" name="phone" class="lead-input" placeholder="Ваш номер телефону" autocomplete="tel" required>
-            <button type="submit" class="btn">Хочу безкоштовний аудит</button>
+            <input id="hero-phone" type="tel" name="phone" class="lead-input" placeholder="Ваш номер телефону" required>
+            <button type="submit" class="btn">ХОЧУ БЕЗКОШТОВНИЙ АУДИТ</button>
             <p class="lead-form__message" role="status" aria-live="polite" hidden></p>
           </form>
         </div>
         <div class="hero-image">
-          <div class="hero-graphic" aria-hidden="true">
+          <div class="hero-graphic">
             <div class="pulse-node pulse-node-1"></div>
             <div class="pulse-node pulse-node-2"></div>
             <div class="pulse-node pulse-node-3"></div>
@@ -94,8 +74,8 @@
             <p>Надамо чіткий план закриття вразливостей, які створюють ризики для бізнесу.</p>
           </div>
         </div>
-        <div class="audit-cta">
-          <a href="#hero" class="btn">Записатися на аудит</a>
+        <div style="text-align:center; margin-top: 50px;">
+          <a href="#hero" class="btn">ЗАПИСАТИСЯ НА АУДИТ</a>
         </div>
       </div>
     </section>
@@ -202,31 +182,31 @@
               <li>Налаштування ПК та мережі</li>
               <li>Базове резервне копіювання файлів</li>
             </ul>
-            <a href="#hero" class="btn tariff-btn">Замовити</a>
+            <a href="#hero" class="btn tariff-btn">ЗАМОВИТИ</a>
           </div>
           <div class="tariff-card featured">
             <h3>Тариф <br> «ПРОФІ»</h3>
             <p class="tariff-description">Для стабільно працюючих компаній (3-10 ПК + сервер)</p>
             <p class="tariff-price">250 <span>грн/міс за робоче місце</span></p>
             <ul class="tariff-list">
-              <li>Повний регламент профілактики</li>
+              <li>ПОВНИЙ регламент профілактики</li>
               <li>Пріоритетна технічна підтримка</li>
               <li>Супровід серверів та ПЗ</li>
               <li>Повний захист від вірусів</li>
             </ul>
-            <a href="#hero" class="btn tariff-btn">Обрати тариф</a>
+            <a href="#hero" class="btn tariff-btn">ОБРАТИ ТАРИФ</a>
           </div>
           <div class="tariff-card">
             <h3>Тариф <br> «БІЗНЕС ГАРАНТ»</h3>
             <p class="tariff-description">Для критичних систем та інтенсивних навантажень (10+ ПК)</p>
             <p class="tariff-price">199 <span>грн/міс за робоче місце</span></p>
             <ul class="tariff-list">
-              <li>Всі послуги тарифу «Профі»</li>
+              <li>Всі послуги тарифу «ПРОФІ»</li>
               <li>VIP-підтримка та швидка реакція</li>
               <li>Розширений моніторинг безпеки</li>
               <li>Спеціальні умови для виїздів</li>
             </ul>
-            <a href="#hero" class="btn tariff-btn">Замовити</a>
+            <a href="#hero" class="btn tariff-btn">ЗАМОВИТИ</a>
           </div>
         </div>
       </div>
@@ -276,8 +256,8 @@
         <p>Замовте Безкоштовний аудит прямо зараз. Ми проаналізуємо ваші ІТ-системи, виявимо слабкі місця та покажемо, як оптимізувати витрати на інфраструктуру.</p>
         <form class="final-form-wrapper" data-lead-form novalidate>
           <label class="visually-hidden" for="cta-phone">Введіть ваш телефон</label>
-          <input id="cta-phone" type="tel" name="phone" class="lead-input" placeholder="Введіть ваш телефон" autocomplete="tel" required>
-          <button type="submit" class="btn">Замовити безкоштовний аудит</button>
+          <input id="cta-phone" type="tel" name="phone" class="lead-input" placeholder="Введіть ваш телефон" required>
+          <button type="submit" class="btn">ЗАМОВИТИ БЕЗКОШТОВНИЙ АУДИТ</button>
           <p class="lead-form__message" role="status" aria-live="polite" hidden></p>
         </form>
       </div>
@@ -287,14 +267,13 @@
   <footer>
     <div class="container">
       <div class="footer-content">
-        <a href="#hero" class="logo" aria-label="FIXSET — на головну">
+        <a href="#hero" class="logo">
           <img src="images/logoFIX.webp" alt="FixSet Logo">
         </a>
         <div class="footer-contacts">
           <h4>Контакти</h4>
           <p>Працюємо по всій Україні 🇺🇦</p>
-          <a href="tel:+380674705737">📞 067 470 57 37</a>
-          <a href="mailto:fixsetua@gmail.com">fixsetua@gmail.com</a>
+          <a href="tel:+380674705737" style="color: var(--text-dark); text-decoration: none; display: block; margin-bottom: 10px; font-weight: bold;">📞 067 470 57 37</a>
           <a href="mailto:info@fixset.com.ua">info@fixset.com.ua</a>
         </div>
         <div class="footer-social">
