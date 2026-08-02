@@ -72,8 +72,41 @@
             <p class="lead-form__message" role="status" aria-live="polite" hidden></p>
           </form>
         </div>
-        <div class="hero__visual">
-          <img src="images/hero-monitor.svg" alt="" width="360" height="290">
+        <div class="hero__visual" role="img" aria-label="Успішне виконання: система працює">
+          <div class="status-mark">
+            <span class="status-mark__glow" aria-hidden="true"></span>
+            <span class="status-mark__disc" aria-hidden="true"></span>
+            <span class="status-mark__circle status-mark__circle--1" aria-hidden="true"></span>
+            <span class="status-mark__circle status-mark__circle--2" aria-hidden="true"></span>
+            <span class="status-mark__circle status-mark__circle--3" aria-hidden="true"></span>
+
+            <div class="status-mark__orbit status-mark__orbit--spin" aria-hidden="true">
+              <span class="status-mark__dot status-mark__dot--lg" style="--a: 12deg; --r: 0.48"></span>
+              <span class="status-mark__dot" style="--a: 78deg; --r: 0.48"></span>
+              <span class="status-mark__dot status-mark__dot--md" style="--a: 150deg; --r: 0.48"></span>
+              <span class="status-mark__dot" style="--a: 220deg; --r: 0.48"></span>
+              <span class="status-mark__dot status-mark__dot--lg" style="--a: 290deg; --r: 0.48"></span>
+            </div>
+
+            <div class="status-mark__orbit status-mark__orbit--counter" aria-hidden="true">
+              <span class="status-mark__dot status-mark__dot--sm" style="--a: 40deg; --r: 0.36"></span>
+              <span class="status-mark__dot status-mark__dot--sm" style="--a: 160deg; --r: 0.36"></span>
+              <span class="status-mark__dot status-mark__dot--md" style="--a: 280deg; --r: 0.36"></span>
+            </div>
+
+            <div class="status-mark__pulse-field" aria-hidden="true">
+              <span class="status-mark__dot status-mark__dot--pulse" style="--x: 12%; --y: 22%"></span>
+              <span class="status-mark__dot status-mark__dot--pulse status-mark__dot--sm" style="--x: 84%; --y: 28%"></span>
+              <span class="status-mark__dot status-mark__dot--pulse status-mark__dot--md" style="--x: 18%; --y: 78%"></span>
+              <span class="status-mark__dot status-mark__dot--pulse" style="--x: 78%; --y: 74%"></span>
+            </div>
+
+            <div class="status-mark__core">
+              <svg class="status-mark__check" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+                <path d="M13 33.2 26.8 47 51 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </section>
