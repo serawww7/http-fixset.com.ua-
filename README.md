@@ -1,14 +1,10 @@
-# FIXSET — корпоративний лендінг
+# FIXSET
 
-Односторінковий сайт ІТ-супроводу малого бізнесу.
+Фінальний лендінг за референсом `gemini-code-1782204097552.html` з правками з ТЗ.
 
-## Стек
+## Запуск
 
-- HTML5
-- CSS3 (`css/style.css`)
-- JavaScript ES6 (`js/script.js`)
-
-Без фреймворків. Відкривається через `index.html`.
+Відкрийте `index.html` у браузері.
 
 ## Структура
 
@@ -16,18 +12,16 @@
 index.html
 css/style.css
 js/script.js
-images/
-fonts/
-icons/
+images/logoFIX.webp
 ```
 
 ## Інтеграції
 
-- Crisp Chat
+- Crisp
 - Binotel
 
 ## Контакти
 
-- Телефон: +380 67 470 57 37
-- Email: fixsetua@gmail.com
-- Email: info@fixset.com.ua
+- 067 470 57 37
+- fixsetua@gmail.com
+- info@fixset.com.ua

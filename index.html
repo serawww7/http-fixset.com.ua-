@@ -19,10 +19,10 @@
   </script>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header__inner">
+  <header>
+    <div class="container header-content">
       <a href="#hero" class="logo" aria-label="FIXSET — на головну">
-        <img src="images/logoFIX.webp" alt="FIXSET" width="180" height="56">
+        <img src="images/logoFIX.webp" alt="FixSet Logo">
       </a>
 
       <button
@@ -37,166 +37,149 @@
         <span class="nav-toggle__bar"></span>
       </button>
 
-      <nav id="site-nav" class="site-nav" aria-label="Основна навігація">
-        <ul class="site-nav__list">
-          <li><a href="#benefits">Аудит</a></li>
-          <li><a href="#services">Послуги</a></li>
+      <nav id="site-nav" class="header-nav" aria-label="Основна навігація">
+        <ul class="header-nav__list">
+          <li><a href="#audit">Аудит</a></li>
+          <li><a href="#reglament">Послуги</a></li>
           <li><a href="#comparison">Порівняння</a></li>
-          <li><a href="#pricing">Тарифи</a></li>
+          <li><a href="#tariffs">Тарифи</a></li>
           <li><a href="#testimonials">Відгуки</a></li>
         </ul>
-        <a href="tel:+380674705737" class="header__phone">067 470 57 37</a>
-        <a href="#benefits" class="btn btn--small">Замовити Аудит</a>
+        <a href="tel:+380674705737" class="nav-phone">📞 067 470 57 37</a>
+        <a href="#audit" class="btn header-cta-btn">Замовити Аудит</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <section id="hero" class="hero" aria-labelledby="hero-title">
-      <div class="container hero__inner">
-        <div class="hero__content">
-          <h1 id="hero-title">ІТ-супровід малого бізнесу.</h1>
-          <p class="hero__lead">Швидка технічна підтримка та повний спектр ІТ послуг для малого бізнесу.</p>
+    <section id="hero">
+      <div class="container hero-content">
+        <div class="hero-text">
+          <h1>ІТ-супровід малого бізнесу.</h1>
+          <p>Швидка технічна підтримка та повний спектр ІТ послуг для малого бізнесу.</p>
           <form class="lead-form" data-lead-form novalidate>
             <label class="visually-hidden" for="hero-phone">Ваш номер телефону</label>
-            <input
-              id="hero-phone"
-              type="tel"
-              name="phone"
-              class="lead-form__input"
-              placeholder="Ваш номер телефону"
-              autocomplete="tel"
-              required
-            >
-            <button type="submit" class="btn">Замовити аудит</button>
+            <input id="hero-phone" type="tel" name="phone" class="lead-input" placeholder="Ваш номер телефону" autocomplete="tel" required>
+            <button type="submit" class="btn">Хочу безкоштовний аудит</button>
             <p class="lead-form__message" role="status" aria-live="polite" hidden></p>
           </form>
         </div>
-        <div class="hero__visual" role="img" aria-label="Успішне виконання: система працює">
-          <div class="status-mark">
-            <span class="status-mark__glow" aria-hidden="true"></span>
-            <span class="status-mark__disc" aria-hidden="true"></span>
-            <span class="status-mark__circle status-mark__circle--1" aria-hidden="true"></span>
-            <span class="status-mark__circle status-mark__circle--2" aria-hidden="true"></span>
-            <span class="status-mark__circle status-mark__circle--3" aria-hidden="true"></span>
+        <div class="hero-image">
+          <div class="hero-graphic" aria-hidden="true">
+            <div class="pulse-node pulse-node-1"></div>
+            <div class="pulse-node pulse-node-2"></div>
+            <div class="pulse-node pulse-node-3"></div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            <div class="status-mark__orbit status-mark__orbit--spin" aria-hidden="true">
-              <span class="status-mark__dot status-mark__dot--lg" style="--a: 12deg; --r: 0.48"></span>
-              <span class="status-mark__dot" style="--a: 78deg; --r: 0.48"></span>
-              <span class="status-mark__dot status-mark__dot--md" style="--a: 150deg; --r: 0.48"></span>
-              <span class="status-mark__dot" style="--a: 220deg; --r: 0.48"></span>
-              <span class="status-mark__dot status-mark__dot--lg" style="--a: 290deg; --r: 0.48"></span>
+    <section id="audit">
+      <div class="container">
+        <h2>Безкоштовно. Швидко. <br> Ми виявимо критичні ІТ-діри у вашому бізнесі.</h2>
+        <div class="audit-benefits">
+          <div class="benefit-card">
+            <div class="benefit-icon">🛡️</div>
+            <h3>Діагностика безпеки</h3>
+            <p>Перевіримо захист від вірусів та спам програм.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">⚙️</div>
+            <h3>Профілактика поломок</h3>
+            <p>Оцінимо стан дисків та заліза на робочих станціях та серверах.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon">📋</div>
+            <h3>Експертний звіт</h3>
+            <p>Надамо чіткий план закриття вразливостей, які створюють ризики для бізнесу.</p>
+          </div>
+        </div>
+        <div class="audit-cta">
+          <a href="#hero" class="btn">Записатися на аудит</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="reglament">
+      <div class="container">
+        <h2>FixSet — це Системна Профілактика, а не просто ремонт.</h2>
+        <div class="reglament-grid">
+          <div class="reglament-item">
+            <div class="reglament-icon">💿</div>
+            <div class="reglament-text">
+              <h3>Миттєва діагностика дисків</h3>
+              <p>Запобігаємо втраті важливих даних.</p>
             </div>
-
-            <div class="status-mark__orbit status-mark__orbit--counter" aria-hidden="true">
-              <span class="status-mark__dot status-mark__dot--sm" style="--a: 40deg; --r: 0.36"></span>
-              <span class="status-mark__dot status-mark__dot--sm" style="--a: 160deg; --r: 0.36"></span>
-              <span class="status-mark__dot status-mark__dot--md" style="--a: 280deg; --r: 0.36"></span>
+          </div>
+          <div class="reglament-item">
+            <div class="reglament-icon">☁️</div>
+            <div class="reglament-text">
+              <h3>Безпечне резервне копіювання</h3>
+              <p>Можливість відновити базу за лічені хвилини.</p>
             </div>
-
-            <div class="status-mark__pulse-field" aria-hidden="true">
-              <span class="status-mark__dot status-mark__dot--pulse" style="--x: 12%; --y: 22%"></span>
-              <span class="status-mark__dot status-mark__dot--pulse status-mark__dot--sm" style="--x: 84%; --y: 28%"></span>
-              <span class="status-mark__dot status-mark__dot--pulse status-mark__dot--md" style="--x: 18%; --y: 78%"></span>
-              <span class="status-mark__dot status-mark__dot--pulse" style="--x: 78%; --y: 74%"></span>
+          </div>
+          <div class="reglament-item">
+            <div class="reglament-icon">🦠</div>
+            <div class="reglament-text">
+              <h3>Захист від шифрувальників</h3>
+              <p>Повний контроль та безпека ваших фінансів.</p>
             </div>
-
-            <div class="status-mark__core">
-              <svg class="status-mark__check" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-                <path d="M13 33.2 26.8 47 51 17" fill="none" stroke="currentColor" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+          </div>
+          <div class="reglament-item">
+            <div class="reglament-icon">🚀</div>
+            <div class="reglament-text">
+              <h3>Оптимізація систем</h3>
+              <p>Запобігаємо «зависанню» комп'ютерів.</p>
+            </div>
+          </div>
+          <div class="reglament-item">
+            <div class="reglament-icon">🖨️</div>
+            <div class="reglament-text">
+              <h3>Налаштування периферії</h3>
+              <p>Безперебійна робота офісної техніки.</p>
+            </div>
+          </div>
+          <div class="reglament-item">
+            <div class="reglament-icon">👨‍💻</div>
+            <div class="reglament-text">
+              <h3>Підтримка M.E.Doc, BAS, УкрСклад та інших програм</h3>
+              <p>Оперативна допомога бухгалтерії та користувачам.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="benefits" class="benefits" aria-labelledby="benefits-title">
+    <section id="comparison">
       <div class="container">
-        <h2 id="benefits-title">Безкоштовно. Швидко.<br>Ми виявимо критичні ІТ-діри у вашому бізнесі.</h2>
-        <ul class="benefits__list">
-          <li class="benefits__item">
-            <h3>Діагностика безпеки</h3>
-            <p>Перевіримо захист від вірусів та спам програм.</p>
-          </li>
-          <li class="benefits__item">
-            <h3>Профілактика поломок</h3>
-            <p>Оцінимо стан дисків та заліза на робочих станціях та серверах.</p>
-          </li>
-          <li class="benefits__item">
-            <h3>Експертний звіт</h3>
-            <p>Надамо чіткий план закриття вразливостей, які створюють ризики для бізнесу.</p>
-          </li>
-        </ul>
-        <div class="section-cta">
-          <a href="#hero" class="btn">Записатися на аудит</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="services" aria-labelledby="services-title">
-      <div class="container">
-        <h2 id="services-title">FixSet — це Системна Профілактика, а не просто ремонт.</h2>
-        <ul class="services__list">
-          <li class="services__item">
-            <h3>Миттєва діагностика дисків</h3>
-            <p>Запобігаємо втраті важливих даних.</p>
-          </li>
-          <li class="services__item">
-            <h3>Безпечне резервне копіювання</h3>
-            <p>Можливість відновити базу за лічені хвилини.</p>
-          </li>
-          <li class="services__item">
-            <h3>Захист від шифрувальників</h3>
-            <p>Повний контроль та безпека ваших фінансів.</p>
-          </li>
-          <li class="services__item">
-            <h3>Оптимізація систем</h3>
-            <p>Запобігаємо «зависанню» комп'ютерів.</p>
-          </li>
-          <li class="services__item">
-            <h3>Налаштування периферії</h3>
-            <p>Безперебійна робота офісної техніки.</p>
-          </li>
-          <li class="services__item">
-            <h3>Підтримка M.E.Doc, BAS, УкрСклад та інших програм</h3>
-            <p>Оперативна допомога бухгалтерії та користувачам.</p>
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section id="comparison" class="comparison" aria-labelledby="comparison-title">
-      <div class="container">
-        <h2 id="comparison-title">Навіщо вашому бізнесу аутсорс від FixSet?</h2>
-        <div class="comparison__wrapper" role="region" aria-label="Таблиця порівняння" tabindex="0">
-          <table class="comparison__table">
-            <caption class="visually-hidden">Порівняння FixSet і штатного або приходящого сисадміна</caption>
+        <h2>Навіщо вашому бізнесу аутсорс від FixSet?</h2>
+        <div class="comparison-table-container">
+          <table class="comparison-table">
             <thead>
               <tr>
-                <th scope="col">Критерій</th>
-                <th scope="col">FixSet (Системний аутсорс)</th>
-                <th scope="col">Штатний або приходящий сисадмін</th>
+                <th>Критерій</th>
+                <th>FixSet (Системний аутсорс)</th>
+                <th>Штатний або приходящий сисадмін</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Підхід до роботи</th>
+                <td>Підхід до роботи</td>
                 <td>Системний регламент профілактики. Працюємо на випередження.</td>
                 <td>Реактивний. З'являється лише тоді, коли робота вже зупинилась.</td>
               </tr>
               <tr>
-                <th scope="row">Надійність</th>
+                <td>Надійність</td>
                 <td>Ціла команда фахівців. Жодних відпусток чи лікарняних.</td>
                 <td>Один фахівець. Ризик простою у разі його відсутності.</td>
               </tr>
               <tr>
-                <th scope="row">Кваліфікація</th>
+                <td>Кваліфікація</td>
                 <td>Досвід вирішення завдань різного профілю та складності.</td>
                 <td>Обмежена лише власним вузьким досвідом.</td>
               </tr>
               <tr>
-                <th scope="row">Фінанси</th>
+                <td>Фінанси</td>
                 <td>Прогнозована абонплата. Без податків та витрат на робоче місце.</td>
                 <td>Висока ЗП, податки, відпускні, закупівля техніки для співробітника.</td>
               </tr>
@@ -206,154 +189,126 @@
       </div>
     </section>
 
-    <section id="pricing" class="pricing" aria-labelledby="pricing-title">
+    <section id="tariffs">
       <div class="container">
-        <h2 id="pricing-title">Оберіть свій пакет ІТ-спокою</h2>
-        <ul class="pricing__list">
-          <li class="pricing__item">
-            <h3>Тариф «Базовий»</h3>
-            <p class="pricing__desc">Для мікробізнесу та компактних офісів (1-2 ПК)</p>
-            <p class="pricing__price">
-              <span class="pricing__amount">300</span>
-              <span class="pricing__unit">грн/міс за робоче місце</span>
-            </p>
-            <ul class="pricing__features">
+        <h2>Оберіть свій пакет ІТ-спокою</h2>
+        <div class="tariffs-grid">
+          <div class="tariff-card">
+            <h3>Тариф <br> «БАЗОВИЙ»</h3>
+            <p class="tariff-description">Для мікробізнесу та компактних офісів (1-2 ПК)</p>
+            <p class="tariff-price">300 <span>грн/міс за робоче місце</span></p>
+            <ul class="tariff-list">
               <li>Швидка технічна підтримка</li>
               <li>Налаштування ПК та мережі</li>
               <li>Базове резервне копіювання файлів</li>
             </ul>
-            <a href="#hero" class="btn btn--outline">Замовити</a>
-          </li>
-          <li class="pricing__item pricing__item--featured">
-            <p class="pricing__badge">Рекомендовано</p>
-            <h3>Тариф «Профі»</h3>
-            <p class="pricing__desc">Для стабільно працюючих компаній (3-10 ПК + сервер)</p>
-            <p class="pricing__price">
-              <span class="pricing__amount">250</span>
-              <span class="pricing__unit">грн/міс за робоче місце</span>
-            </p>
-            <ul class="pricing__features">
+            <a href="#hero" class="btn tariff-btn">Замовити</a>
+          </div>
+          <div class="tariff-card featured">
+            <h3>Тариф <br> «ПРОФІ»</h3>
+            <p class="tariff-description">Для стабільно працюючих компаній (3-10 ПК + сервер)</p>
+            <p class="tariff-price">250 <span>грн/міс за робоче місце</span></p>
+            <ul class="tariff-list">
               <li>Повний регламент профілактики</li>
               <li>Пріоритетна технічна підтримка</li>
               <li>Супровід серверів та ПЗ</li>
               <li>Повний захист від вірусів</li>
             </ul>
-            <a href="#hero" class="btn">Обрати тариф</a>
-          </li>
-          <li class="pricing__item">
-            <h3>Тариф «Бізнес Гарант»</h3>
-            <p class="pricing__desc">Для критичних систем та інтенсивних навантажень (10+ ПК)</p>
-            <p class="pricing__price">
-              <span class="pricing__amount">199</span>
-              <span class="pricing__unit">грн/міс за робоче місце</span>
-            </p>
-            <ul class="pricing__features">
+            <a href="#hero" class="btn tariff-btn">Обрати тариф</a>
+          </div>
+          <div class="tariff-card">
+            <h3>Тариф <br> «БІЗНЕС ГАРАНТ»</h3>
+            <p class="tariff-description">Для критичних систем та інтенсивних навантажень (10+ ПК)</p>
+            <p class="tariff-price">199 <span>грн/міс за робоче місце</span></p>
+            <ul class="tariff-list">
               <li>Всі послуги тарифу «Профі»</li>
               <li>VIP-підтримка та швидка реакція</li>
               <li>Розширений моніторинг безпеки</li>
               <li>Спеціальні умови для виїздів</li>
             </ul>
-            <a href="#hero" class="btn btn--outline">Замовити</a>
-          </li>
-        </ul>
+            <a href="#hero" class="btn tariff-btn">Замовити</a>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="testimonials" class="testimonials" aria-labelledby="testimonials-title">
+    <section id="testimonials">
       <div class="container">
-        <h2 id="testimonials-title">Українські підприємці довіряють FIXSET</h2>
-        <ul class="testimonials__list">
-          <li class="testimonials__item">
-            <blockquote>
-              <p>«Після того як ледь не втратили базу 1С через шифрувальник, перейшли на FixSet. Тепер спимо спокійно, бекапи робляться як годинник.»</p>
-              <footer>
-                <cite>
-                  <span class="testimonials__name">Олег</span>
-                  <span class="testimonials__role">Керівник роздрібної мережі</span>
-                </cite>
-              </footer>
-            </blockquote>
-          </li>
-          <li class="testimonials__item">
-            <blockquote>
-              <p>«Швидкість реакції вражає. Коли зупиняється каса — це втрата грошей. Хлопці підключаються за хвилину і все вирішують віддалено.»</p>
-              <footer>
-                <cite>
-                  <span class="testimonials__name">Ірина</span>
-                  <span class="testimonials__role">Власниця аптеки</span>
-                </cite>
-              </footer>
-            </blockquote>
-          </li>
-          <li class="testimonials__item">
-            <blockquote>
-              <p>«Забули що таке проблеми з принтерами та мережею. Техніка просто працює. Рекомендую для системного бізнесу.»</p>
-              <footer>
-                <cite>
-                  <span class="testimonials__name">Максим</span>
-                  <span class="testimonials__role">Директор дистриб'юторської компанії</span>
-                </cite>
-              </footer>
-            </blockquote>
-          </li>
-        </ul>
+        <h2>Українські підприємці довіряють FIXSET</h2>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Після того як ледь не втратили базу 1С через шифрувальник, перейшли на FixSet. Тепер спимо спокійно, бекапи робляться як годинник."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-author-photo"></div>
+              <div>
+                <h4>Олег</h4>
+                <p>Керівник роздрібної мережі</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Швидкість реакції вражає. Коли зупиняється каса — це втрата грошей. Хлопці підключаються за хвилину і все вирішують віддалено."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-author-photo"></div>
+              <div>
+                <h4>Ірина</h4>
+                <p>Власниця аптеки</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">"Забули що таке проблеми з принтерами та мережею. Техніка просто працює. Рекомендую для системного бізнесу."</p>
+            <div class="testimonial-author">
+              <div class="testimonial-author-photo"></div>
+              <div>
+                <h4>Максим</h4>
+                <p>Директор дистриб'юторської компанії</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="cta" class="cta" aria-labelledby="cta-title">
-      <div class="container cta__inner">
-        <h2 id="cta-title">Готові до системного спокою?</h2>
+    <section id="final-cta">
+      <div class="container">
+        <h2>Готові до системного спокою?</h2>
         <p>Замовте Безкоштовний аудит прямо зараз. Ми проаналізуємо ваші ІТ-системи, виявимо слабкі місця та покажемо, як оптимізувати витрати на інфраструктуру.</p>
-        <form class="lead-form lead-form--centered" data-lead-form novalidate>
+        <form class="final-form-wrapper" data-lead-form novalidate>
           <label class="visually-hidden" for="cta-phone">Введіть ваш телефон</label>
-          <input
-            id="cta-phone"
-            type="tel"
-            name="phone"
-            class="lead-form__input"
-            placeholder="Введіть ваш телефон"
-            autocomplete="tel"
-            required
-          >
-          <button type="submit" class="btn">Замовити аудит</button>
+          <input id="cta-phone" type="tel" name="phone" class="lead-input" placeholder="Введіть ваш телефон" autocomplete="tel" required>
+          <button type="submit" class="btn">Замовити безкоштовний аудит</button>
           <p class="lead-form__message" role="status" aria-live="polite" hidden></p>
         </form>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer>
     <div class="container">
-      <div class="footer__inner">
+      <div class="footer-content">
         <a href="#hero" class="logo" aria-label="FIXSET — на головну">
-          <img src="images/logoFIX.webp" alt="FIXSET" width="180" height="56">
+          <img src="images/logoFIX.webp" alt="FixSet Logo">
         </a>
-
-        <div class="footer__contacts">
-          <h2 class="footer__heading">Контакти</h2>
-          <p>Працюємо по всій Україні</p>
-          <p>
-            <a href="tel:+380674705737">067 470 57 37</a>
-          </p>
-          <p>
-            <a href="mailto:fixsetua@gmail.com">fixsetua@gmail.com</a>
-          </p>
-          <p>
-            <a href="mailto:info@fixset.com.ua">info@fixset.com.ua</a>
-          </p>
+        <div class="footer-contacts">
+          <h4>Контакти</h4>
+          <p>Працюємо по всій Україні 🇺🇦</p>
+          <a href="tel:+380674705737">📞 067 470 57 37</a>
+          <a href="mailto:fixsetua@gmail.com">fixsetua@gmail.com</a>
+          <a href="mailto:info@fixset.com.ua">info@fixset.com.ua</a>
         </div>
-
-        <div class="footer__social">
-          <h2 class="footer__heading">Слідкуйте за нами</h2>
-          <ul class="footer__social-list">
-            <li><a href="#">TikTok</a></li>
-            <li><a href="#">Instagram</a></li>
-            <li><a href="#">Facebook</a></li>
-          </ul>
+        <div class="footer-social">
+          <h4>Слідкуйте за нами</h4>
+          <div class="footer-social-links">
+            <a href="#">TikTok</a>
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+          </div>
         </div>
       </div>
-
-      <p class="footer__copy">&copy; 2026 FIXSET. Всі права захищено. Безперебійна робота вашого бізнесу.</p>
+      <div class="footer-bottom">
+        <p>&copy; 2026 FIXSET. Всі права захищено. Безперебійна робота вашого бізнесу.</p>
+      </div>
     </div>
   </footer>
 
