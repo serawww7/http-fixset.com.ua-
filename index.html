@@ -333,28 +333,39 @@
   </footer>
 
   <aside class="design-demo" aria-label="Варіант дизайну">
-    <p class="design-demo__title">Варіант дизайну</p>
-    <div class="design-demo__actions" role="group" aria-label="Концепції оформлення">
-      <button type="button" class="design-demo__btn" data-theme="theme-1" aria-pressed="true">
-        <span class="design-demo__btn-name">Theme 1</span>
-        <span class="design-demo__btn-concept">Concept A — Corporate</span>
-      </button>
-      <button type="button" class="design-demo__btn" data-theme="theme-2" aria-pressed="false">
-        <span class="design-demo__btn-name">Theme 2</span>
-        <span class="design-demo__btn-concept">Corporate Trust</span>
-      </button>
-      <button type="button" class="design-demo__btn" data-theme="theme-3" aria-pressed="false">
-        <span class="design-demo__btn-name">Theme 3</span>
-        <span class="design-demo__btn-concept">Apple Style</span>
-      </button>
-      <button type="button" class="design-demo__btn" data-theme="theme-4" aria-pressed="false">
-        <span class="design-demo__btn-name">Theme 4</span>
-        <span class="design-demo__btn-concept">Enterprise</span>
-      </button>
-      <button type="button" class="design-demo__btn" data-theme="theme-5" aria-pressed="false">
-        <span class="design-demo__btn-name">Theme 5</span>
-        <span class="design-demo__btn-concept">Human First</span>
-      </button>
+    <button
+      type="button"
+      class="design-demo__toggle"
+      aria-expanded="false"
+      aria-controls="design-demo-panel"
+      aria-label="Відкрити вибір дизайну"
+    >
+      🎨
+    </button>
+    <div id="design-demo-panel" class="design-demo__panel">
+      <p class="design-demo__title">Варіант дизайну</p>
+      <div class="design-demo__actions" role="group" aria-label="Концепції оформлення">
+        <button type="button" class="design-demo__btn" data-theme="theme-1" aria-pressed="true">
+          <span class="design-demo__btn-name">Theme 1</span>
+          <span class="design-demo__btn-concept">Corporate</span>
+        </button>
+        <button type="button" class="design-demo__btn" data-theme="theme-2" aria-pressed="false">
+          <span class="design-demo__btn-name">Theme 2</span>
+          <span class="design-demo__btn-concept">Corporate Trust</span>
+        </button>
+        <button type="button" class="design-demo__btn" data-theme="theme-3" aria-pressed="false">
+          <span class="design-demo__btn-name">Theme 3</span>
+          <span class="design-demo__btn-concept">Apple Style</span>
+        </button>
+        <button type="button" class="design-demo__btn" data-theme="theme-4" aria-pressed="false">
+          <span class="design-demo__btn-name">Theme 4</span>
+          <span class="design-demo__btn-concept">Enterprise</span>
+        </button>
+        <button type="button" class="design-demo__btn" data-theme="theme-5" aria-pressed="false">
+          <span class="design-demo__btn-name">Theme 5</span>
+          <span class="design-demo__btn-concept">Human First</span>
+        </button>
+      </div>
     </div>
   </aside>
 

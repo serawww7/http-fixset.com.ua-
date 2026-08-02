@@ -1,81 +1,162 @@
-/* Demo-only theme switcher panel */
+/* Demo-only theme switcher — compact & non-intrusive */
 
 .design-demo {
   position: fixed;
-  top: 0.85rem;
-  right: 0.85rem;
-  z-index: 10000;
-  width: min(15.5rem, calc(100vw - 1.5rem));
-  max-height: calc(100vh - 1.5rem);
-  overflow-y: auto;
-  padding: 0.75rem;
-  background: #111;
-  color: #f5f5f5;
-  border: 1px solid #333;
-  border-radius: 6px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  top: 4.75rem;
+  right: 0.75rem;
+  z-index: 900;
+  width: 200px;
   font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  pointer-events: none;
+}
+
+.design-demo__toggle {
+  display: none;
+  pointer-events: auto;
+}
+
+.design-demo__panel {
+  pointer-events: auto;
+  padding: 0.5rem;
+  background: #ffffff;
+  color: #222;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .design-demo__title {
-  margin: 0 0 0.55rem;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+  margin: 0 0 0.35rem;
+  padding: 0 0.15rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #cfcfcf;
+  color: #888;
 }
 
 .design-demo__actions {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.25rem;
 }
 
 .design-demo__btn {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
   width: 100%;
-  padding: 0.55rem 0.65rem;
-  border: 1px solid #3a3a3a;
+  min-height: 30px;
+  height: 30px;
+  padding: 0 0.5rem;
+  border: 1px solid #e6e6e6;
   border-radius: 4px;
-  background: #1a1a1a;
-  color: #f5f5f5;
+  background: #fafafa;
+  color: #222;
   text-align: left;
   cursor: pointer;
   font: inherit;
+  line-height: 1;
 }
 
 .design-demo__btn:hover,
 .design-demo__btn:focus-visible {
-  border-color: #777;
+  border-color: #bbb;
+  background: #fff;
   outline: none;
 }
 
 .design-demo__btn[aria-pressed="true"] {
-  border-color: #e8e8e8;
-  background: #2a2a2a;
+  border-color: #999;
+  background: #f0f0f0;
 }
 
 .design-demo__btn-name {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 700;
+  white-space: nowrap;
 }
 
 .design-demo__btn-concept {
-  font-size: 0.68rem;
-  line-height: 1.3;
-  color: #b0b0b0;
+  font-size: 0.62rem;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+/* Tablet — keep compact panel, slightly narrower */
+
+@media (max-width: 900px) and (min-width: 769px) {
+  .design-demo {
+    width: 180px;
+    top: 4.5rem;
+    right: 0.6rem;
+  }
+}
+
+/* Mobile — FAB + popup */
 
 @media (max-width: 768px) {
   .design-demo {
-    top: auto;
-    bottom: 0.75rem;
-    right: 0.75rem;
-    width: min(13.5rem, calc(100vw - 1.25rem));
-    opacity: 0.96;
+    top: 0.7rem;
+    right: 3.4rem;
+    width: auto;
+    pointer-events: none;
+  }
+
+  .design-demo__toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: #ffffff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.05rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .design-demo__toggle:hover,
+  .design-demo__toggle:focus-visible {
+    outline: none;
+    border-color: #bbb;
+  }
+
+  .design-demo__panel {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.4rem);
+    right: 0;
+    width: 200px;
+    max-height: min(60vh, 22rem);
+    overflow-y: auto;
+    z-index: 1;
+  }
+
+  .design-demo.is-open .design-demo__panel {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .design-demo {
+    right: 3.25rem;
+  }
+
+  .design-demo__toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .design-demo__panel {
+    width: 180px;
   }
 }

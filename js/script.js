@@ -47,9 +47,41 @@
   if (themeLink && themeButtons.length) {
     applyTheme(getSavedTheme(), false);
 
+    const demo = document.querySelector('.design-demo');
+    const demoToggle = document.querySelector('.design-demo__toggle');
+    const demoPanel = document.querySelector('#design-demo-panel');
+
+    const setDemoOpen = (isOpen) => {
+      if (!demo || !demoToggle) return;
+      demo.classList.toggle('is-open', isOpen);
+      demoToggle.setAttribute('aria-expanded', String(isOpen));
+      demoToggle.setAttribute(
+        'aria-label',
+        isOpen ? 'Закрити вибір дизайну' : 'Відкрити вибір дизайну'
+      );
+    };
+
+    if (demoToggle && demoPanel) {
+      demoToggle.addEventListener('click', (event) => {
+        event.stopPropagation();
+        setDemoOpen(!demo.classList.contains('is-open'));
+      });
+
+      document.addEventListener('click', (event) => {
+        if (!demo.classList.contains('is-open')) return;
+        if (demo.contains(event.target)) return;
+        setDemoOpen(false);
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') setDemoOpen(false);
+      });
+    }
+
     themeButtons.forEach((button) => {
       button.addEventListener('click', () => {
         applyTheme(button.getAttribute('data-theme'), true);
+        setDemoOpen(false);
       });
     });
   }
