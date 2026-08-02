@@ -1,0 +1,58 @@
+/* Стилі лише для index-v2.html — базовий style.css без змін вигляду v1 */
+
+.btn {
+  background: linear-gradient(135deg, #154766, #2AA5B6);
+  box-shadow: 0 4px 15px rgba(42, 165, 182, 0.35), 0 0 0 4px #EAF6F6;
+}
+
+.btn:hover {
+  box-shadow: 0 6px 20px rgba(42, 165, 182, 0.55), 0 0 0 5px #EAF6F6;
+}
+
+.desktop-nav {
+  display: none;
+  align-items: center;
+  gap: 22px;
+  margin-right: auto;
+  margin-left: 40px;
+  flex: 1;
+}
+
+.desktop-nav a {
+  color: var(--deep-blue);
+  text-decoration: none;
+  font-size: 0.95em;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+
+.desktop-nav a:hover {
+  color: #2AA5B6;
+}
+
+.header-content .header-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.hero-monitor {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+@media (min-width: 993px) {
+  .desktop-nav {
+    display: flex;
+  }
+}
+
+@media (max-width: 992px) {
+  .desktop-nav {
+    display: none;
+  }
+}

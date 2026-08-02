@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FIXSET — ІТ-супровід малого бізнесу | Вся Україна</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style-v2.css">
   <script type="text/javascript">
     window.$crisp = [];
     window.CRISP_WEBSITE_ID = "9c600460-bab5-43ec-adca-c704c721fcd6";
@@ -20,8 +21,8 @@
 <body>
 
   <div class="design-switcher" aria-label="Перемикач дизайну">
-    <a href="index.html" class="design-switcher__btn is-active">Дизайн 1</a>
-    <a href="index-v2.html" class="design-switcher__btn">Дизайн 2</a>
+    <a href="index.html" class="design-switcher__btn">Дизайн 1</a>
+    <a href="index-v2.html" class="design-switcher__btn is-active">Дизайн 2</a>
   </div>
 
   <header>
@@ -29,7 +30,14 @@
       <a href="#hero" class="logo">
         <img src="images/logoFIX.webp" alt="FixSet Logo">
       </a>
-      <div>
+      <nav class="desktop-nav" aria-label="Основне меню">
+        <a href="#audit">Аудит</a>
+        <a href="#reglament">Послуги</a>
+        <a href="#comparison">Порівняння</a>
+        <a href="#tariffs">Тарифи</a>
+        <a href="#testimonials">Відгуки</a>
+      </nav>
+      <div class="header-actions">
         <a href="tel:+380674705737" class="nav-phone">📞 067 470 57 37</a>
         <a href="#audit" class="btn header-cta-btn">Замовити Аудит</a>
       </div>
@@ -50,11 +58,7 @@
           </form>
         </div>
         <div class="hero-image">
-          <div class="hero-graphic">
-            <div class="pulse-node pulse-node-1"></div>
-            <div class="pulse-node pulse-node-2"></div>
-            <div class="pulse-node pulse-node-3"></div>
-          </div>
+          <img src="images/hero-monitor.webp" alt="ІТ-супровід FixSet" class="hero-monitor">
         </div>
       </div>
     </section>
