@@ -1,13 +1,19 @@
 (() => {
   'use strict';
 
+  const PREFIX = '(0';
+  const PREFIX_CARET = 2;
+
   const getPhoneDigits = (value) => {
-    let digits = value.replace(/\D/g, '');
+    let digits = String(value || '').replace(/\D/g, '');
 
     if (digits.startsWith('380')) {
-      digits = digits.slice(3);
+      digits = '0' + digits.slice(3);
     } else if (digits.startsWith('38')) {
       digits = digits.slice(2);
+      if (digits.length === 9 && !digits.startsWith('0')) {
+        digits = '0' + digits;
+      }
     }
 
     return digits.slice(0, 10);
@@ -54,6 +60,51 @@
     return result;
   };
 
+  const countDigitsBefore = (value, caret) =>
+    String(value || '')
+      .slice(0, Math.max(0, caret || 0))
+      .replace(/\D/g, '').length;
+
+  const setCaretByDigitIndex = (input, digitIndex) => {
+    if (digitIndex <= 0) {
+      input.setSelectionRange(0, 0);
+      return;
+    }
+
+    const value = input.value;
+    let seen = 0;
+
+    for (let i = 0; i < value.length; i += 1) {
+      if (/\d/.test(value[i])) {
+        seen += 1;
+        if (seen >= digitIndex) {
+          input.setSelectionRange(i + 1, i + 1);
+          return;
+        }
+      }
+    }
+
+    input.setSelectionRange(value.length, value.length);
+  };
+
+  const applyPhoneValue = (input, rawValue, digitCaretIndex) => {
+    input.value = formatUaPhone(rawValue);
+    setCaretByDigitIndex(input, digitCaretIndex);
+    input.classList.remove('is-invalid');
+  };
+
+  const ensurePhonePrefix = (input) => {
+    if (getPhoneDigits(input.value).length === 0) {
+      input.value = PREFIX;
+    }
+  };
+
+  const placeCaretAfterPrefix = (input) => {
+    if (input.value.startsWith(PREFIX)) {
+      input.setSelectionRange(PREFIX_CARET, PREFIX_CARET);
+    }
+  };
+
   const isValidPhone = (value) => getPhoneDigits(value).length === 10;
 
   const showMessage = (form, text, type) => {
@@ -74,6 +125,13 @@
   };
 
   const bindPhoneMask = (input) => {
+    input.addEventListener('focus', () => {
+      ensurePhonePrefix(input);
+      if (input.value === PREFIX) {
+        requestAnimationFrame(() => placeCaretAfterPrefix(input));
+      }
+    });
+
     input.addEventListener('keydown', (event) => {
       const allowedKeys = [
         'Backspace',
@@ -89,7 +147,7 @@
         'End',
       ];
 
-      if (allowedKeys.includes(event.key) || event.ctrlKey || event.metaKey) {
+      if (allowedKeys.includes(event.key) || event.ctrlKey || event.metaKey || event.altKey) {
         return;
       }
 
@@ -98,16 +156,30 @@
       }
     });
 
+    input.addEventListener('beforeinput', (event) => {
+      if (event.inputType === 'insertText' && event.data && /\D/.test(event.data)) {
+        event.preventDefault();
+      }
+    });
+
     input.addEventListener('input', () => {
-      input.value = formatUaPhone(input.value);
-      input.classList.remove('is-invalid');
+      const caret = input.selectionStart || 0;
+      const digitsBeforeCaret = countDigitsBefore(input.value, caret);
+      applyPhoneValue(input, input.value, digitsBeforeCaret);
     });
 
     input.addEventListener('paste', (event) => {
       event.preventDefault();
+
       const pasted = (event.clipboardData || window.clipboardData).getData('text');
-      input.value = formatUaPhone(pasted);
-      input.classList.remove('is-invalid');
+      const selectionStart = input.selectionStart || 0;
+      const selectionEnd = input.selectionEnd || 0;
+      const nextRaw =
+        input.value.slice(0, selectionStart) + pasted + input.value.slice(selectionEnd);
+      const digitCaretIndex =
+        countDigitsBefore(input.value, selectionStart) + getPhoneDigits(pasted).length;
+
+      applyPhoneValue(input, nextRaw, digitCaretIndex);
     });
   };
 
@@ -121,7 +193,9 @@
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('audit-modal-open');
     if (modalPhone) {
+      ensurePhonePrefix(modalPhone);
       modalPhone.focus();
+      placeCaretAfterPrefix(modalPhone);
     }
   };
 
@@ -172,7 +246,7 @@
       const phone = input.value.trim();
       const isModalForm = form.hasAttribute('data-audit-modal-form');
 
-      if (!phone) {
+      if (!phone || getPhoneDigits(phone).length <= 1) {
         input.classList.add('is-invalid');
         showMessage(form, 'Вкажіть номер телефону.', 'error');
         input.focus();
