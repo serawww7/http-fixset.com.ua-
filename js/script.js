@@ -1,91 +1,6 @@
 (() => {
   'use strict';
 
-  const THEME_KEY = 'fixset-theme';
-  const THEMES = {
-    'theme-1': 'css/theme-1.css',
-    'theme-2': 'css/theme-2.css',
-    'theme-3': 'css/theme-3.css',
-    'theme-4': 'css/theme-4.css',
-    'theme-5': 'css/theme-5.css',
-  };
-
-  const themeLink = document.querySelector('#theme-css');
-  const themeButtons = document.querySelectorAll('[data-theme]');
-
-  const getSavedTheme = () => {
-    try {
-      const saved = localStorage.getItem(THEME_KEY);
-      return THEMES[saved] ? saved : 'theme-1';
-    } catch (error) {
-      return 'theme-1';
-    }
-  };
-
-  const setActiveButtons = (themeId) => {
-    themeButtons.forEach((button) => {
-      const isActive = button.getAttribute('data-theme') === themeId;
-      button.setAttribute('aria-pressed', String(isActive));
-    });
-  };
-
-  const applyTheme = (themeId, persist) => {
-    if (!themeLink || !THEMES[themeId]) return;
-
-    themeLink.setAttribute('href', THEMES[themeId]);
-    setActiveButtons(themeId);
-
-    if (persist) {
-      try {
-        localStorage.setItem(THEME_KEY, themeId);
-      } catch (error) {
-        /* ignore quota / private mode */
-      }
-    }
-  };
-
-  if (themeLink && themeButtons.length) {
-    applyTheme(getSavedTheme(), false);
-
-    const demo = document.querySelector('.design-demo');
-    const demoToggle = document.querySelector('.design-demo__toggle');
-    const demoPanel = document.querySelector('#design-demo-panel');
-
-    const setDemoOpen = (isOpen) => {
-      if (!demo || !demoToggle) return;
-      demo.classList.toggle('is-open', isOpen);
-      demoToggle.setAttribute('aria-expanded', String(isOpen));
-      demoToggle.setAttribute(
-        'aria-label',
-        isOpen ? 'Закрити вибір дизайну' : 'Відкрити вибір дизайну'
-      );
-    };
-
-    if (demoToggle && demoPanel) {
-      demoToggle.addEventListener('click', (event) => {
-        event.stopPropagation();
-        setDemoOpen(!demo.classList.contains('is-open'));
-      });
-
-      document.addEventListener('click', (event) => {
-        if (!demo.classList.contains('is-open')) return;
-        if (demo.contains(event.target)) return;
-        setDemoOpen(false);
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape') setDemoOpen(false);
-      });
-    }
-
-    themeButtons.forEach((button) => {
-      button.addEventListener('click', () => {
-        applyTheme(button.getAttribute('data-theme'), true);
-        setDemoOpen(false);
-      });
-    });
-  }
-
   const navToggle = document.querySelector('.nav-toggle');
   const siteNav = document.querySelector('#site-nav');
   const navLinks = siteNav ? siteNav.querySelectorAll('a') : [];
@@ -131,9 +46,9 @@
     message.classList.add(type === 'error' ? 'is-error' : 'is-success');
   };
 
-  const forms = document.querySelectorAll('[data-lead-form]');
   const MAILTO = 'fixsetua@gmail.com';
   const MAIL_SUBJECT = 'Заявка із сайту';
+  const forms = document.querySelectorAll('[data-lead-form]');
 
   forms.forEach((form) => {
     form.addEventListener('submit', (event) => {

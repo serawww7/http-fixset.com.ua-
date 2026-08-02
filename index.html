@@ -5,21 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="FIXSET — ІТ-супровід малого бізнесу. Швидка технічна підтримка та повний спектр ІТ послуг по всій Україні.">
   <title>FIXSET — ІТ-супровід малого бізнесу | Вся Україна</title>
-  <link rel="stylesheet" href="css/common.css">
-  <link id="theme-css" rel="stylesheet" href="css/theme-1.css">
-  <link rel="stylesheet" href="css/demo.css">
-  <script>
-    (function () {
-      var key = "fixset-theme";
-      var allowed = { "theme-1": true, "theme-2": true, "theme-3": true, "theme-4": true, "theme-5": true };
-      try {
-        var saved = localStorage.getItem(key);
-        if (saved && allowed[saved]) {
-          document.getElementById("theme-css").setAttribute("href", "css/" + saved + ".css");
-        }
-      } catch (e) {}
-    })();
-  </script>
+  <link rel="stylesheet" href="css/style.css">
   <script type="text/javascript">
     window.$crisp = [];
     window.CRISP_WEBSITE_ID = "9c600460-bab5-43ec-adca-c704c721fcd6";
@@ -36,7 +22,7 @@
   <header class="site-header">
     <div class="container header__inner">
       <a href="#hero" class="logo" aria-label="FIXSET — на головну">
-        <img src="images/logoFIX.webp" alt="FIXSET" width="180" height="52">
+        <img src="images/logoFIX.webp" alt="FIXSET" width="180" height="56">
       </a>
 
       <button
@@ -85,6 +71,9 @@
             <button type="submit" class="btn">Замовити аудит</button>
             <p class="lead-form__message" role="status" aria-live="polite" hidden></p>
           </form>
+        </div>
+        <div class="hero__visual">
+          <img src="images/hero-monitor.svg" alt="" width="360" height="290">
         </div>
       </div>
     </section>
@@ -304,7 +293,7 @@
     <div class="container">
       <div class="footer__inner">
         <a href="#hero" class="logo" aria-label="FIXSET — на головну">
-          <img src="images/logoFIX.webp" alt="FIXSET" width="180" height="52">
+          <img src="images/logoFIX.webp" alt="FIXSET" width="180" height="56">
         </a>
 
         <div class="footer__contacts">
@@ -334,43 +323,6 @@
       <p class="footer__copy">&copy; 2026 FIXSET. Всі права захищено. Безперебійна робота вашого бізнесу.</p>
     </div>
   </footer>
-
-  <aside class="design-demo" aria-label="Варіант дизайну">
-    <button
-      type="button"
-      class="design-demo__toggle"
-      aria-expanded="false"
-      aria-controls="design-demo-panel"
-      aria-label="Відкрити вибір дизайну"
-    >
-      🎨
-    </button>
-    <div id="design-demo-panel" class="design-demo__panel">
-      <p class="design-demo__title">Варіант дизайну</p>
-      <div class="design-demo__actions" role="group" aria-label="Концепції оформлення">
-        <button type="button" class="design-demo__btn" data-theme="theme-1" aria-pressed="true">
-          <span class="design-demo__btn-name">Theme 1</span>
-          <span class="design-demo__btn-concept">Corporate</span>
-        </button>
-        <button type="button" class="design-demo__btn" data-theme="theme-2" aria-pressed="false">
-          <span class="design-demo__btn-name">Theme 2</span>
-          <span class="design-demo__btn-concept">Corporate Trust</span>
-        </button>
-        <button type="button" class="design-demo__btn" data-theme="theme-3" aria-pressed="false">
-          <span class="design-demo__btn-name">Theme 3</span>
-          <span class="design-demo__btn-concept">Apple Style</span>
-        </button>
-        <button type="button" class="design-demo__btn" data-theme="theme-4" aria-pressed="false">
-          <span class="design-demo__btn-name">Theme 4</span>
-          <span class="design-demo__btn-concept">Enterprise</span>
-        </button>
-        <button type="button" class="design-demo__btn" data-theme="theme-5" aria-pressed="false">
-          <span class="design-demo__btn-name">Theme 5</span>
-          <span class="design-demo__btn-concept">Human First</span>
-        </button>
-      </div>
-    </div>
-  </aside>
 
   <script src="js/script.js"></script>
   <script src="https://widgets.binotel.com/getcall/widgets/45l2x28b6jim9mr2se3p.js" async></script>
