@@ -246,10 +246,9 @@ main {
 .phone-field__prefix {
   flex-shrink: 0;
   padding-left: 20px;
-  color: var(--text-dark);
+  color: #b3b3b3;
   font-size: 1.1em;
-  font-weight: 600;
-  opacity: 0.7;
+  font-weight: 500;
   user-select: none;
   pointer-events: none;
 }
@@ -262,6 +261,7 @@ main {
   border-radius: 30px;
   padding-left: 10px;
   background: transparent;
+  color: var(--text-dark);
 }
 
 .phone-field .lead-input:focus {

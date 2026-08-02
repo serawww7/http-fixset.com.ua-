@@ -1,111 +1,112 @@
 (() => {
   'use strict';
 
-  const PREFIX = '(0';
-  const PREFIX_CARET = 2;
+  const MASK_BASE = '(0)';
+  const BASE_CARET = 2;
 
-  const getPhoneDigits = (value) => {
+  const getEditableDigits = (value) => {
     let digits = String(value || '').replace(/\D/g, '');
 
     if (digits.startsWith('380')) {
-      digits = '0' + digits.slice(3);
+      digits = digits.slice(3);
     } else if (digits.startsWith('38')) {
       digits = digits.slice(2);
-      if (digits.length === 9 && !digits.startsWith('0')) {
-        digits = '0' + digits;
-      }
     }
 
-    return digits.slice(0, 10);
+    if (digits.startsWith('0')) {
+      digits = digits.slice(1);
+    }
+
+    return digits.slice(0, 9);
   };
 
   const formatUaPhone = (value) => {
-    const digits = getPhoneDigits(value);
+    const d = getEditableDigits(value);
+    let result = '(0';
 
-    if (!digits.length) {
-      return '';
+    result += d.slice(0, 2);
+    result += ')';
+
+    if (d.length > 2) {
+      result += ' ' + d.slice(2, 5);
     }
 
-    const p1 = digits.slice(0, 3);
-    const p2 = digits.slice(3, 6);
-    const p3 = digits.slice(6, 8);
-    const p4 = digits.slice(8, 10);
-
-    let result = '(' + p1;
-
-    if (digits.length >= 3) {
-      result += ')';
+    if (d.length > 5) {
+      result += '-' + d.slice(5, 7);
     }
 
-    if (p2) {
-      result += ' ' + p2;
-    }
-
-    if (digits.length >= 6) {
-      result += '-';
-    }
-
-    if (p3) {
-      result += p3;
-    }
-
-    if (digits.length >= 8) {
-      result += '-';
-    }
-
-    if (p4) {
-      result += p4;
+    if (d.length > 7) {
+      result += '-' + d.slice(7, 9);
     }
 
     return result;
   };
 
-  const countDigitsBefore = (value, caret) =>
-    String(value || '')
-      .slice(0, Math.max(0, caret || 0))
-      .replace(/\D/g, '').length;
+  const countEditableBefore = (value, caret) => {
+    let editableSeen = 0;
+    let passedFixedZero = false;
+    const limit = Math.max(0, caret || 0);
+    const str = String(value || '');
 
-  const setCaretByDigitIndex = (input, digitIndex) => {
-    if (digitIndex <= 0) {
-      input.setSelectionRange(0, 0);
+    for (let i = 0; i < limit && i < str.length; i += 1) {
+      if (!/\d/.test(str[i])) continue;
+
+      if (!passedFixedZero) {
+        passedFixedZero = true;
+        continue;
+      }
+
+      editableSeen += 1;
+    }
+
+    return editableSeen;
+  };
+
+  const setCaretByEditableIndex = (input, editableIndex) => {
+    const value = input.value;
+    const target = Math.max(0, Math.min(9, editableIndex || 0));
+
+    if (target === 0) {
+      input.setSelectionRange(BASE_CARET, BASE_CARET);
       return;
     }
 
-    const value = input.value;
-    let seen = 0;
+    let editableSeen = 0;
+    let passedFixedZero = false;
 
     for (let i = 0; i < value.length; i += 1) {
-      if (/\d/.test(value[i])) {
-        seen += 1;
-        if (seen >= digitIndex) {
-          input.setSelectionRange(i + 1, i + 1);
-          return;
-        }
+      if (!/\d/.test(value[i])) continue;
+
+      if (!passedFixedZero) {
+        passedFixedZero = true;
+        continue;
+      }
+
+      editableSeen += 1;
+      if (editableSeen >= target) {
+        input.setSelectionRange(i + 1, i + 1);
+        return;
       }
     }
 
     input.setSelectionRange(value.length, value.length);
   };
 
-  const applyPhoneValue = (input, rawValue, digitCaretIndex) => {
+  const applyPhoneValue = (input, rawValue, editableCaretIndex) => {
     input.value = formatUaPhone(rawValue);
-    setCaretByDigitIndex(input, digitCaretIndex);
+    setCaretByEditableIndex(input, editableCaretIndex);
     input.classList.remove('is-invalid');
   };
 
-  const ensurePhonePrefix = (input) => {
-    if (getPhoneDigits(input.value).length === 0) {
-      input.value = PREFIX;
-    }
+  const ensurePhoneMask = (input) => {
+    input.value = formatUaPhone(input.value);
   };
 
-  const placeCaretAfterPrefix = (input) => {
-    if (input.value.startsWith(PREFIX)) {
-      input.setSelectionRange(PREFIX_CARET, PREFIX_CARET);
-    }
+  const placeCaretAtBase = (input) => {
+    input.setSelectionRange(BASE_CARET, BASE_CARET);
   };
 
-  const isValidPhone = (value) => getPhoneDigits(value).length === 10;
+  const isValidPhone = (value) => getEditableDigits(value).length === 9;
 
   const showMessage = (form, text, type) => {
     const message = form.querySelector('.lead-form__message');
@@ -125,17 +126,81 @@
   };
 
   const bindPhoneMask = (input) => {
+    const clampCaret = () => {
+      const start = input.selectionStart || 0;
+      const end = input.selectionEnd || 0;
+
+      if (start === end && start < BASE_CARET) {
+        input.setSelectionRange(BASE_CARET, BASE_CARET);
+        return;
+      }
+
+      if (start < BASE_CARET) {
+        input.setSelectionRange(BASE_CARET, Math.max(end, BASE_CARET));
+      }
+    };
+
     input.addEventListener('focus', () => {
-      ensurePhonePrefix(input);
-      if (input.value === PREFIX) {
-        requestAnimationFrame(() => placeCaretAfterPrefix(input));
+      ensurePhoneMask(input);
+      if (getEditableDigits(input.value).length === 0) {
+        requestAnimationFrame(() => placeCaretAtBase(input));
       }
     });
 
+    input.addEventListener('click', clampCaret);
+    input.addEventListener('keyup', clampCaret);
+
     input.addEventListener('keydown', (event) => {
-      const allowedKeys = [
-        'Backspace',
-        'Delete',
+      const key = event.key;
+      const start = input.selectionStart || 0;
+      const end = input.selectionEnd || 0;
+      const value = input.value;
+      const digits = getEditableDigits(value);
+      const editableBefore = countEditableBefore(value, start);
+      const editableAfter = countEditableBefore(value, end);
+
+      if (event.ctrlKey || event.metaKey || event.altKey) {
+        return;
+      }
+
+      if (key === 'Backspace') {
+        event.preventDefault();
+
+        if (start !== end) {
+          const next = digits.slice(0, editableBefore) + digits.slice(editableAfter);
+          applyPhoneValue(input, next, editableBefore);
+          return;
+        }
+
+        if (editableBefore === 0) {
+          placeCaretAtBase(input);
+          return;
+        }
+
+        const next = digits.slice(0, editableBefore - 1) + digits.slice(editableBefore);
+        applyPhoneValue(input, next, editableBefore - 1);
+        return;
+      }
+
+      if (key === 'Delete') {
+        event.preventDefault();
+
+        if (start !== end) {
+          const next = digits.slice(0, editableBefore) + digits.slice(editableAfter);
+          applyPhoneValue(input, next, editableBefore);
+          return;
+        }
+
+        if (editableBefore >= digits.length) {
+          return;
+        }
+
+        const next = digits.slice(0, editableBefore) + digits.slice(editableBefore + 1);
+        applyPhoneValue(input, next, editableBefore);
+        return;
+      }
+
+      const navKeys = [
         'Tab',
         'Escape',
         'Enter',
@@ -147,13 +212,25 @@
         'End',
       ];
 
-      if (allowedKeys.includes(event.key) || event.ctrlKey || event.metaKey || event.altKey) {
+      if (navKeys.includes(key)) {
         return;
       }
 
-      if (!/^\d$/.test(event.key)) {
+      if (/^\d$/.test(key)) {
         event.preventDefault();
+
+        let next = digits.slice(0, editableBefore) + key + digits.slice(editableAfter);
+        next = next.slice(0, 9);
+
+        if (next.length === digits.length && start === end && digits.length >= 9) {
+          return;
+        }
+
+        applyPhoneValue(input, next, Math.min(editableBefore + 1, next.length));
+        return;
       }
+
+      event.preventDefault();
     });
 
     input.addEventListener('beforeinput', (event) => {
@@ -164,22 +241,23 @@
 
     input.addEventListener('input', () => {
       const caret = input.selectionStart || 0;
-      const digitsBeforeCaret = countDigitsBefore(input.value, caret);
-      applyPhoneValue(input, input.value, digitsBeforeCaret);
+      const editableBefore = countEditableBefore(input.value, caret);
+      applyPhoneValue(input, input.value, editableBefore);
     });
 
     input.addEventListener('paste', (event) => {
       event.preventDefault();
 
       const pasted = (event.clipboardData || window.clipboardData).getData('text');
-      const selectionStart = input.selectionStart || 0;
-      const selectionEnd = input.selectionEnd || 0;
-      const nextRaw =
-        input.value.slice(0, selectionStart) + pasted + input.value.slice(selectionEnd);
-      const digitCaretIndex =
-        countDigitsBefore(input.value, selectionStart) + getPhoneDigits(pasted).length;
+      const start = input.selectionStart || 0;
+      const end = input.selectionEnd || 0;
+      const digits = getEditableDigits(input.value);
+      const pastedDigits = getEditableDigits(pasted);
+      const editableBefore = countEditableBefore(input.value, start);
+      const editableAfter = countEditableBefore(input.value, end);
+      const next = (digits.slice(0, editableBefore) + pastedDigits + digits.slice(editableAfter)).slice(0, 9);
 
-      applyPhoneValue(input, nextRaw, digitCaretIndex);
+      applyPhoneValue(input, next, Math.min(next.length, editableBefore + pastedDigits.length));
     });
   };
 
@@ -193,9 +271,9 @@
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('audit-modal-open');
     if (modalPhone) {
-      ensurePhonePrefix(modalPhone);
+      ensurePhoneMask(modalPhone);
       modalPhone.focus();
-      placeCaretAfterPrefix(modalPhone);
+      placeCaretAtBase(modalPhone);
     }
   };
 
@@ -209,6 +287,7 @@
       clearMessage(modalForm);
       if (modalPhone) {
         modalPhone.classList.remove('is-invalid');
+        modalPhone.value = MASK_BASE;
       }
     }
   };
@@ -236,6 +315,7 @@
     const input = form.querySelector('input[name="phone"]');
     if (input) {
       bindPhoneMask(input);
+      input.value = MASK_BASE;
     }
 
     form.addEventListener('submit', (event) => {
@@ -246,7 +326,7 @@
       const phone = input.value.trim();
       const isModalForm = form.hasAttribute('data-audit-modal-form');
 
-      if (!phone || getPhoneDigits(phone).length <= 1) {
+      if (!phone || getEditableDigits(phone).length === 0) {
         input.classList.add('is-invalid');
         showMessage(form, 'Вкажіть номер телефону.', 'error');
         input.focus();
@@ -263,6 +343,7 @@
       input.classList.remove('is-invalid');
       showMessage(form, 'Дякуємо! Ми звʼяжемося з вами найближчим часом.', 'success');
       form.reset();
+      input.value = MASK_BASE;
 
       if (isModalForm) {
         closeModal();
