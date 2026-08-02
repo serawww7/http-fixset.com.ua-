@@ -1,6 +1,6 @@
 # FIXSET
 
-Фінальний лендінг за референсом `gemini-code-1782204097552.html` з правками з ТЗ.
+Фінальний лендінг ІТ-супроводу малого бізнесу.
 
 ## Запуск
 
@@ -13,6 +13,7 @@ index.html
 css/style.css
 js/script.js
 images/logoFIX.webp
+images/hero-monitor.webp
 ```
 
 ## Інтеграції
@@ -24,4 +25,3 @@ images/logoFIX.webp
 
 - 067 470 57 37
 - fixsetua@gmail.com
-- info@fixset.com.ua
