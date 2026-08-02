@@ -1,7 +1,6 @@
 (() => {
   'use strict';
 
-  const MASK_BASE = '(0)';
   const BASE_CARET = 2;
 
   const getEditableDigits = (value) => {
@@ -22,6 +21,11 @@
 
   const formatUaPhone = (value) => {
     const d = getEditableDigits(value);
+
+    if (!d.length) {
+      return '';
+    }
+
     let result = '(0';
 
     result += d.slice(0, 2);
@@ -64,6 +68,12 @@
 
   const setCaretByEditableIndex = (input, editableIndex) => {
     const value = input.value;
+
+    if (!value) {
+      input.setSelectionRange(0, 0);
+      return;
+    }
+
     const target = Math.max(0, Math.min(9, editableIndex || 0));
 
     if (target === 0) {
@@ -103,6 +113,11 @@
   };
 
   const placeCaretAtBase = (input) => {
+    if (!input.value) {
+      input.setSelectionRange(0, 0);
+      return;
+    }
+
     input.setSelectionRange(BASE_CARET, BASE_CARET);
   };
 
@@ -127,6 +142,8 @@
 
   const bindPhoneMask = (input) => {
     const clampCaret = () => {
+      if (!input.value) return;
+
       const start = input.selectionStart || 0;
       const end = input.selectionEnd || 0;
 
@@ -142,8 +159,8 @@
 
     input.addEventListener('focus', () => {
       ensurePhoneMask(input);
-      if (getEditableDigits(input.value).length === 0) {
-        requestAnimationFrame(() => placeCaretAtBase(input));
+      if (!input.value) {
+        requestAnimationFrame(() => input.setSelectionRange(0, 0));
       }
     });
 
@@ -287,7 +304,7 @@
       clearMessage(modalForm);
       if (modalPhone) {
         modalPhone.classList.remove('is-invalid');
-        modalPhone.value = MASK_BASE;
+        modalPhone.value = '';
       }
     }
   };
@@ -315,7 +332,7 @@
     const input = form.querySelector('input[name="phone"]');
     if (input) {
       bindPhoneMask(input);
-      input.value = MASK_BASE;
+      input.value = '';
     }
 
     form.addEventListener('submit', (event) => {
@@ -343,7 +360,7 @@
       input.classList.remove('is-invalid');
       showMessage(form, 'Дякуємо! Ми звʼяжемося з вами найближчим часом.', 'success');
       form.reset();
-      input.value = MASK_BASE;
+      input.value = '';
 
       if (isModalForm) {
         closeModal();
