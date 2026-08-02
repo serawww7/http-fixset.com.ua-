@@ -679,6 +679,58 @@ footer {
   border-color: #b42318;
 }
 
+/* --- TOAST УСПІХУ --- */
+.lead-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 3000;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 16px 18px;
+  background: var(--pristine-white);
+  color: var(--text-dark);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(10, 37, 64, 0.16);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lead-toast[hidden] {
+  display: none;
+}
+
+.lead-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lead-toast__icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(40, 167, 69, 0.12);
+  color: var(--vibrant-green);
+  font-size: 0.95em;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.lead-toast__text {
+  margin: 0;
+  font-size: 0.95em;
+  line-height: 1.45;
+  white-space: pre-line;
+}
+
 /* --- POPUP ЗАЯВКИ --- */
 .audit-modal {
   position: fixed;

@@ -142,6 +142,49 @@
   const SITE_NAME = 'fixset.com.ua';
   const SUCCESS_MESSAGE = 'Дякуємо! Ми скоро зателефонуємо.';
   const ERROR_MESSAGE = 'Не вдалося відправити заявку. Спробуйте ще раз.';
+  const TOAST_MESSAGE =
+    '✅ Ваш номер успішно відправлено.\nНаш менеджер зв\'яжеться з вами найближчим робочим часом.';
+  const TOAST_DURATION_MS = 4000;
+
+  let toastHideTimer = null;
+  let toastRemoveTimer = null;
+
+  const getSuccessToast = () => {
+    let toast = document.getElementById('lead-success-toast');
+    if (toast) return toast;
+
+    toast = document.createElement('div');
+    toast.id = 'lead-success-toast';
+    toast.className = 'lead-toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    toast.innerHTML =
+      '<span class="lead-toast__icon" aria-hidden="true">✓</span>' +
+      '<p class="lead-toast__text"></p>';
+    document.body.appendChild(toast);
+    return toast;
+  };
+
+  const showSuccessToast = () => {
+    const toast = getSuccessToast();
+    const textEl = toast.querySelector('.lead-toast__text');
+    if (textEl) textEl.textContent = TOAST_MESSAGE;
+
+    clearTimeout(toastHideTimer);
+    clearTimeout(toastRemoveTimer);
+
+    toast.hidden = false;
+    toast.classList.remove('is-visible');
+    void toast.offsetWidth;
+    toast.classList.add('is-visible');
+
+    toastHideTimer = setTimeout(() => {
+      toast.classList.remove('is-visible');
+      toastRemoveTimer = setTimeout(() => {
+        toast.hidden = true;
+      }, 320);
+    }, TOAST_DURATION_MS);
+  };
 
   const toApiPhone = (value) => `+380${getEditableDigits(value)}`;
 
@@ -456,6 +499,7 @@
         });
 
         resetPhoneInput(input);
+        showSuccessToast();
 
         if (isModalForm) {
           if (modalMessageForm) {
