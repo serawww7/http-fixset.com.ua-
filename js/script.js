@@ -132,6 +132,8 @@
   };
 
   const forms = document.querySelectorAll('[data-lead-form]');
+  const MAILTO = 'fixsetua@gmail.com';
+  const MAIL_SUBJECT = 'Заявка із сайту';
 
   forms.forEach((form) => {
     form.addEventListener('submit', (event) => {
@@ -157,11 +159,20 @@
       }
 
       input.classList.remove('is-invalid');
+
+      const body = `Телефон: ${phone}`;
+      const mailtoUrl =
+        `mailto:${MAILTO}` +
+        `?subject=${encodeURIComponent(MAIL_SUBJECT)}` +
+        `&body=${encodeURIComponent(body)}`;
+
       showMessage(
         form,
-        'Дякуємо! Ми звʼяжемося з вами найближчим часом.',
+        'Відкриваємо поштовий клієнт для відправки заявки…',
         'success'
       );
+
+      window.location.href = mailtoUrl;
       form.reset();
     });
 

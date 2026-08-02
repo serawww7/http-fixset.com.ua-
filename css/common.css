@@ -9,28 +9,31 @@
   --font-size-base: 1.0625rem;
   --line-height-base: 1.7;
   --color-white: #ffffff;
-  --color-warm: #ebe8e4;
-  --color-graphite: #2c2c2c;
-  --color-dark: #161616;
-  --color-text: #1f1f1f;
-  --color-muted: #6a6a6a;
-  --color-line: #cfcbc6;
-  --color-accent: #c45c26;
-  --color-accent-hover: #a44a1c;
+  --color-warm: #EAF6F6;
+  --color-graphite: #154766;
+  --color-dark: #154766;
+  --color-text: #154766;
+  --color-muted: #3d5a6c;
+  --color-line: #cfe3e6;
+  --color-accent: #2AA5B6;
+  --color-accent-hover: #238f9e;
   --color-on-accent: #ffffff;
-  --color-on-dark: #f3f1ee;
-  --color-on-dark-muted: #a8a49e;
-  --color-placeholder: #9a9690;
+  --color-on-dark: #F5FDFD;
+  --color-on-dark-muted: #c5dde0;
+  --color-placeholder: #7a9aa3;
   --color-error: #9b1c1c;
   --color-success: #1f6b3a;
-  --color-footer-muted: #7a7670;
-  --header-bg: rgba(255, 255, 255, 0.96);
-  --nav-link-transform: uppercase;
-  --nav-link-tracking: 0.04em;
-  --nav-link-size: 0.8125rem;
+  --color-footer-muted: #5a7a88;
+  --header-bg: rgba(245, 253, 253, 0.96);
+  --nav-link-transform: none;
+  --nav-link-tracking: 0.01em;
+  --nav-link-size: 0.95rem;
   --nav-link-weight: 600;
-  --section-line-dark: rgba(255, 255, 255, 0.15);
-  --section-line-dark-soft: rgba(255, 255, 255, 0.12);
+  --section-line-dark: rgba(245, 253, 253, 0.18);
+  --section-line-dark-soft: rgba(245, 253, 253, 0.12);
+  --hero-visual: url("../images/hero-monitor.svg");
+  --hero-visual-bg: #EAF6F6;
+  --hero-visual-size: contain;
 }
 
 *,
@@ -170,8 +173,9 @@ p {
 }
 
 .logo img {
-  width: 128px;
-  height: auto;
+  width: auto;
+  max-height: 52px;
+  height: 52px;
 }
 
 .nav-toggle {
@@ -227,9 +231,9 @@ p {
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   min-height: calc(100svh - var(--header-h));
-  background: var(--color-white);
+  background: var(--color-warm);
 }
 
 .hero__inner {
@@ -239,11 +243,11 @@ p {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding: 4.5rem clamp(1.25rem, 4vw, 4rem) 4.5rem clamp(1.25rem, 6vw, 5rem);
+  padding: 4.5rem clamp(1.25rem, 4vw, 3rem) 4.5rem max(1.25rem, calc((100vw - var(--container)) / 2));
 }
 
 .hero__content {
-  width: min(100%, 34rem);
+  width: min(100%, 36rem);
 }
 
 .hero__content h1 {
@@ -251,9 +255,9 @@ p {
 }
 
 .hero__lead {
-  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   line-height: 1.65;
-  max-width: 30rem;
+  max-width: 32rem;
   margin-bottom: 2rem;
   color: var(--color-muted);
 }
@@ -262,10 +266,10 @@ p {
   content: "";
   display: block;
   min-height: 22rem;
-  background-color: var(--color-dark);
-  background-image: url("../images/hero.jpg");
+  background-color: var(--hero-visual-bg);
+  background-image: var(--hero-visual);
   background-position: center;
-  background-size: cover;
+  background-size: var(--hero-visual-size);
   background-repeat: no-repeat;
   border-left: 1px solid var(--color-line);
 }
@@ -832,6 +836,7 @@ p {
     border-left: none;
     border-top: 1px solid var(--color-line);
     order: -1;
+    background-size: var(--hero-visual-size);
   }
 
   .benefits .container {
