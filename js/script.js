@@ -138,6 +138,59 @@
     message.classList.remove('is-error', 'is-success');
   };
 
+  const LEAD_ENDPOINT = 'https://fixset-api.serawww.workers.dev/lead';
+  const SITE_NAME = 'fixset.com.ua';
+  const SUCCESS_MESSAGE = 'Дякуємо! Ми скоро зателефонуємо.';
+  const ERROR_MESSAGE = 'Не вдалося відправити заявку. Спробуйте ще раз.';
+
+  const toApiPhone = (value) => `+380${getEditableDigits(value)}`;
+
+  const resetPhoneInput = (input) => {
+    if (!input) return;
+    input.classList.remove('is-invalid');
+    input.value = MASK_BASE;
+    syncPhoneFieldState(input);
+  };
+
+  const setSubmitLoading = (button, isLoading) => {
+    if (!button) return;
+
+    if (isLoading) {
+      if (!button.dataset.originalText) {
+        button.dataset.originalText = button.textContent;
+      }
+      button.disabled = true;
+      button.textContent = 'Відправлення...';
+      return;
+    }
+
+    button.disabled = false;
+    button.textContent = button.dataset.originalText || button.textContent;
+    delete button.dataset.originalText;
+  };
+
+  const sendLead = async ({ phone, source }) => {
+    const response = await fetch(LEAD_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        phone,
+        source,
+        site: SITE_NAME,
+      }),
+    });
+
+    const data = await response.json().catch(() => null);
+
+    if (!response.ok || !data || data.success !== true) {
+      throw new Error('Lead request failed');
+    }
+
+    return data;
+  };
+
   const bindPhoneMask = (input) => {
     const clampCaret = () => {
       const start = input.selectionStart || 0;
@@ -277,16 +330,39 @@
   const modal = document.getElementById('audit-modal');
   const modalForm = modal ? modal.querySelector('[data-audit-modal-form]') : null;
   const modalPhone = modalForm ? modalForm.querySelector('input[name="phone"]') : null;
+  let modalSource = '';
+  let modalMessageForm = null;
 
-  const openModal = () => {
+  const openModal = (options = {}) => {
     if (!modal) return;
+
+    const {
+      source = '',
+      phoneValue = '',
+      messageForm = null,
+    } = options;
+
+    modalSource = source;
+    modalMessageForm = messageForm;
+
     modal.hidden = false;
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('audit-modal-open');
+
+    if (modalForm) {
+      clearMessage(modalForm);
+    }
+
     if (modalPhone) {
-      ensurePhoneMask(modalPhone);
+      applyPhoneValue(
+        modalPhone,
+        phoneValue || MASK_BASE,
+        getEditableDigits(phoneValue).length,
+      );
       modalPhone.focus();
-      placeCaretAtBase(modalPhone);
+      if (!getEditableDigits(modalPhone.value).length) {
+        placeCaretAtBase(modalPhone);
+      }
     }
   };
 
@@ -298,18 +374,24 @@
     if (modalForm) {
       modalForm.reset();
       clearMessage(modalForm);
-      if (modalPhone) {
-        modalPhone.classList.remove('is-invalid');
-        modalPhone.value = MASK_BASE;
-        syncPhoneFieldState(modalPhone);
-      }
+      resetPhoneInput(modalPhone);
     }
   };
 
   document.querySelectorAll('[data-open-audit-modal]').forEach((trigger) => {
     trigger.addEventListener('click', (event) => {
       event.preventDefault();
-      openModal();
+
+      const sourceForm = trigger.closest('[data-lead-form]');
+      const sourcePhone = sourceForm
+        ? sourceForm.querySelector('input[name="phone"]')
+        : null;
+
+      openModal({
+        source: trigger.dataset.source || (sourceForm && sourceForm.dataset.source) || '',
+        phoneValue: sourcePhone ? sourcePhone.value : '',
+        messageForm: sourceForm,
+      });
     });
   });
 
@@ -327,19 +409,21 @@
 
   forms.forEach((form) => {
     const input = form.querySelector('input[name="phone"]');
+    const submitButton = form.querySelector('button[type="submit"]');
+    const isModalForm = form.hasAttribute('data-audit-modal-form');
+
     if (input) {
       bindPhoneMask(input);
       input.value = MASK_BASE;
       syncPhoneFieldState(input);
     }
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      if (!input) return;
+      if (!input || form.dataset.submitting === 'true') return;
 
       const phone = input.value.trim();
-      const isModalForm = form.hasAttribute('data-audit-modal-form');
 
       if (!phone || getEditableDigits(phone).length === 0) {
         input.classList.add('is-invalid');
@@ -356,13 +440,43 @@
       }
 
       input.classList.remove('is-invalid');
-      showMessage(form, 'Дякуємо! Ми звʼяжемося з вами найближчим часом.', 'success');
-      form.reset();
-      input.value = MASK_BASE;
-      syncPhoneFieldState(input);
+      clearMessage(form);
 
-      if (isModalForm) {
-        closeModal();
+      const source = isModalForm
+        ? (modalSource || form.dataset.source || '')
+        : (form.dataset.source || '');
+
+      form.dataset.submitting = 'true';
+      setSubmitLoading(submitButton, true);
+
+      try {
+        await sendLead({
+          phone: toApiPhone(phone),
+          source,
+        });
+
+        resetPhoneInput(input);
+
+        if (isModalForm) {
+          if (modalMessageForm) {
+            const openerPhone = modalMessageForm.querySelector('input[name="phone"]');
+            resetPhoneInput(openerPhone);
+          }
+
+          const thanksForm = modalMessageForm
+            || document.querySelector('[data-lead-form]:not([data-audit-modal-form])');
+          closeModal();
+          if (thanksForm) {
+            showMessage(thanksForm, SUCCESS_MESSAGE, 'success');
+          }
+        } else {
+          showMessage(form, SUCCESS_MESSAGE, 'success');
+        }
+      } catch (error) {
+        showMessage(form, ERROR_MESSAGE, 'error');
+      } finally {
+        form.dataset.submitting = 'false';
+        setSubmitLoading(submitButton, false);
       }
     });
   });
