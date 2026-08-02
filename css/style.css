@@ -225,6 +225,49 @@ main {
   border-color: var(--technical-cyan);
 }
 
+.phone-field {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  border: 2px solid #ccc;
+  border-radius: 30px;
+  background: var(--pristine-white);
+  box-sizing: border-box;
+}
+
+.phone-field:focus-within {
+  border-color: var(--technical-cyan);
+}
+
+.phone-field.is-invalid {
+  border-color: #b42318;
+}
+
+.phone-field__prefix {
+  flex-shrink: 0;
+  padding-left: 20px;
+  color: var(--text-dark);
+  font-size: 1.1em;
+  font-weight: 600;
+  opacity: 0.7;
+  user-select: none;
+  pointer-events: none;
+}
+
+.phone-field .lead-input {
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  border: none;
+  border-radius: 30px;
+  padding-left: 10px;
+  background: transparent;
+}
+
+.phone-field .lead-input:focus {
+  border: none;
+}
+
 /* --- БЛОК 2: ЛІД-МАГНІТ (АУДИТ) --- */
 #audit {
   background-color: var(--pristine-white);
@@ -607,6 +650,10 @@ footer {
   border-color: #b42318;
 }
 
+.phone-field:has(.lead-input.is-invalid) {
+  border-color: #b42318;
+}
+
 /* --- POPUP ЗАЯВКИ --- */
 .audit-modal {
   position: fixed;
@@ -679,7 +726,7 @@ footer {
   gap: 14px;
 }
 
-.audit-modal__form .lead-input {
+.audit-modal__form .phone-field {
   width: 100%;
 }
 
@@ -770,7 +817,8 @@ body.audit-modal-open {
     gap: 24px;
   }
 
-  .lead-input {
+  .lead-input,
+  .phone-field {
     width: 100%;
   }
 }

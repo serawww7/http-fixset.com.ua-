@@ -25,7 +25,7 @@
     const p3 = digits.slice(6, 8);
     const p4 = digits.slice(8, 10);
 
-    let result = '+38 (' + p1;
+    let result = '(' + p1;
 
     if (digits.length >= 3) {
       result += ')';
