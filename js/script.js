@@ -65,6 +65,14 @@
     message.classList.add(type === 'error' ? 'is-error' : 'is-success');
   };
 
+  const clearMessage = (form) => {
+    const message = form.querySelector('.lead-form__message');
+    if (!message) return;
+    message.hidden = true;
+    message.textContent = '';
+    message.classList.remove('is-error', 'is-success');
+  };
+
   const bindPhoneMask = (input) => {
     input.addEventListener('keydown', (event) => {
       const allowedKeys = [
@@ -103,6 +111,51 @@
     });
   };
 
+  const modal = document.getElementById('audit-modal');
+  const modalForm = modal ? modal.querySelector('[data-audit-modal-form]') : null;
+  const modalPhone = modalForm ? modalForm.querySelector('input[name="phone"]') : null;
+
+  const openModal = () => {
+    if (!modal) return;
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('audit-modal-open');
+    if (modalPhone) {
+      modalPhone.focus();
+    }
+  };
+
+  const closeModal = () => {
+    if (!modal) return;
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('audit-modal-open');
+    if (modalForm) {
+      modalForm.reset();
+      clearMessage(modalForm);
+      if (modalPhone) {
+        modalPhone.classList.remove('is-invalid');
+      }
+    }
+  };
+
+  document.querySelectorAll('[data-open-audit-modal]').forEach((trigger) => {
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
+      openModal();
+    });
+  });
+
+  document.querySelectorAll('[data-close-audit-modal]').forEach((el) => {
+    el.addEventListener('click', closeModal);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal && !modal.hidden) {
+      closeModal();
+    }
+  });
+
   const forms = document.querySelectorAll('[data-lead-form]');
 
   forms.forEach((form) => {
@@ -117,6 +170,7 @@
       if (!input) return;
 
       const phone = input.value.trim();
+      const isModalForm = form.hasAttribute('data-audit-modal-form');
 
       if (!phone) {
         input.classList.add('is-invalid');
@@ -135,6 +189,10 @@
       input.classList.remove('is-invalid');
       showMessage(form, 'Дякуємо! Ми звʼяжемося з вами найближчим часом.', 'success');
       form.reset();
+
+      if (isModalForm) {
+        closeModal();
+      }
     });
   });
 })();

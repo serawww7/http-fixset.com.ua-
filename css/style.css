@@ -607,6 +607,90 @@ footer {
   border-color: #b42318;
 }
 
+/* --- POPUP ЗАЯВКИ --- */
+.audit-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.audit-modal[hidden] {
+  display: none;
+}
+
+.audit-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 37, 64, 0.55);
+}
+
+.audit-modal__dialog {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  background: var(--pristine-white);
+  border-radius: 16px;
+  padding: 36px 28px 28px;
+  box-shadow: 0 16px 40px rgba(21, 71, 102, 0.2);
+}
+
+.audit-modal__close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  color: var(--deep-blue);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px 8px;
+  opacity: 0.7;
+}
+
+.audit-modal__close:hover {
+  opacity: 1;
+}
+
+.audit-modal__dialog h2 {
+  font-size: 1.55em;
+  text-align: left;
+  margin: 0 0 12px;
+}
+
+.audit-modal__dialog h2::after {
+  margin: 12px 0 0;
+}
+
+.audit-modal__text {
+  margin: 0 0 22px;
+  color: var(--text-dark);
+  font-size: 0.98em;
+}
+
+.audit-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.audit-modal__form .lead-input {
+  width: 100%;
+}
+
+.audit-modal__form .btn {
+  width: 100%;
+}
+
+body.audit-modal-open {
+  overflow: hidden;
+}
+
 /* Адаптивність */
 
 @media (max-width: 992px) {
