@@ -1,6 +1,7 @@
 (() => {
   'use strict';
 
+  const MASK_BASE = '(0';
   const BASE_CARET = 2;
 
   const getEditableDigits = (value) => {
@@ -23,7 +24,7 @@
     const d = getEditableDigits(value);
 
     if (!d.length) {
-      return '';
+      return MASK_BASE;
     }
 
     let result = '(0';
@@ -68,12 +69,6 @@
 
   const setCaretByEditableIndex = (input, editableIndex) => {
     const value = input.value;
-
-    if (!value) {
-      input.setSelectionRange(0, 0);
-      return;
-    }
-
     const target = Math.max(0, Math.min(9, editableIndex || 0));
 
     if (target === 0) {
@@ -102,22 +97,25 @@
     input.setSelectionRange(value.length, value.length);
   };
 
+  const syncPhoneFieldState = (input) => {
+    const field = input.closest('.phone-field');
+    if (!field) return;
+    field.classList.toggle('is-filled', getEditableDigits(input.value).length > 0);
+  };
+
   const applyPhoneValue = (input, rawValue, editableCaretIndex) => {
     input.value = formatUaPhone(rawValue);
     setCaretByEditableIndex(input, editableCaretIndex);
     input.classList.remove('is-invalid');
+    syncPhoneFieldState(input);
   };
 
   const ensurePhoneMask = (input) => {
     input.value = formatUaPhone(input.value);
+    syncPhoneFieldState(input);
   };
 
   const placeCaretAtBase = (input) => {
-    if (!input.value) {
-      input.setSelectionRange(0, 0);
-      return;
-    }
-
     input.setSelectionRange(BASE_CARET, BASE_CARET);
   };
 
@@ -142,8 +140,6 @@
 
   const bindPhoneMask = (input) => {
     const clampCaret = () => {
-      if (!input.value) return;
-
       const start = input.selectionStart || 0;
       const end = input.selectionEnd || 0;
 
@@ -159,8 +155,8 @@
 
     input.addEventListener('focus', () => {
       ensurePhoneMask(input);
-      if (!input.value) {
-        requestAnimationFrame(() => input.setSelectionRange(0, 0));
+      if (getEditableDigits(input.value).length === 0) {
+        requestAnimationFrame(() => placeCaretAtBase(input));
       }
     });
 
@@ -304,7 +300,8 @@
       clearMessage(modalForm);
       if (modalPhone) {
         modalPhone.classList.remove('is-invalid');
-        modalPhone.value = '';
+        modalPhone.value = MASK_BASE;
+        syncPhoneFieldState(modalPhone);
       }
     }
   };
@@ -332,7 +329,8 @@
     const input = form.querySelector('input[name="phone"]');
     if (input) {
       bindPhoneMask(input);
-      input.value = '';
+      input.value = MASK_BASE;
+      syncPhoneFieldState(input);
     }
 
     form.addEventListener('submit', (event) => {
@@ -360,7 +358,8 @@
       input.classList.remove('is-invalid');
       showMessage(form, 'Дякуємо! Ми звʼяжемося з вами найближчим часом.', 'success');
       form.reset();
-      input.value = '';
+      input.value = MASK_BASE;
+      syncPhoneFieldState(input);
 
       if (isModalForm) {
         closeModal();

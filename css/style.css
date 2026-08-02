@@ -253,6 +253,14 @@ main {
   pointer-events: none;
 }
 
+.phone-field__input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
 .phone-field .lead-input {
   width: 100%;
   min-width: 0;
@@ -266,6 +274,23 @@ main {
 
 .phone-field .lead-input:focus {
   border: none;
+}
+
+.phone-field__hint {
+  position: absolute;
+  left: calc(10px + 2ch);
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b3b3b3;
+  font-size: 1.1em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.phone-field.is-filled .phone-field__hint {
+  display: none;
 }
 
 /* --- БЛОК 2: ЛІД-МАГНІТ (АУДИТ) --- */

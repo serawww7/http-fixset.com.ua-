@@ -48,7 +48,10 @@
             <label class="visually-hidden" for="hero-phone">Ваш номер телефону</label>
             <div class="phone-field">
               <span class="phone-field__prefix" aria-hidden="true">+38</span>
-              <input id="hero-phone" type="tel" name="phone" class="lead-input" placeholder="67 470 57 37" inputmode="numeric" autocomplete="tel" maxlength="15" required>
+              <div class="phone-field__input-wrap">
+                <input id="hero-phone" type="tel" name="phone" class="lead-input" inputmode="numeric" autocomplete="tel" maxlength="15" required>
+                <span class="phone-field__hint" aria-hidden="true">__) ___ __ __</span>
+              </div>
             </div>
             <button type="submit" class="btn">ХОЧУ БЕЗКОШТОВНИЙ АУДИТ</button>
             <p class="lead-form__message" role="status" aria-live="polite" hidden></p>
@@ -264,7 +267,10 @@
           <label class="visually-hidden" for="cta-phone">Введіть ваш телефон</label>
           <div class="phone-field">
             <span class="phone-field__prefix" aria-hidden="true">+38</span>
-            <input id="cta-phone" type="tel" name="phone" class="lead-input" placeholder="67 470 57 37" inputmode="numeric" autocomplete="tel" maxlength="15" required>
+            <div class="phone-field__input-wrap">
+              <input id="cta-phone" type="tel" name="phone" class="lead-input" inputmode="numeric" autocomplete="tel" maxlength="15" required>
+              <span class="phone-field__hint" aria-hidden="true">__) ___ __ __</span>
+            </div>
           </div>
           <button type="button" class="btn" data-open-audit-modal>ЗАМОВИТИ БЕЗКОШТОВНИЙ АУДИТ</button>
           <p class="lead-form__message" role="status" aria-live="polite" hidden></p>
@@ -308,7 +314,10 @@
         <label class="visually-hidden" for="modal-phone">Телефон</label>
         <div class="phone-field">
           <span class="phone-field__prefix" aria-hidden="true">+38</span>
-          <input id="modal-phone" type="tel" name="phone" class="lead-input" placeholder="67 470 57 37" inputmode="numeric" autocomplete="tel" maxlength="15" required>
+          <div class="phone-field__input-wrap">
+            <input id="modal-phone" type="tel" name="phone" class="lead-input" inputmode="numeric" autocomplete="tel" maxlength="15" required>
+            <span class="phone-field__hint" aria-hidden="true">__) ___ __ __</span>
+          </div>
         </div>
         <button type="submit" class="btn">Відправити</button>
         <p class="lead-form__message" role="status" aria-live="polite" hidden></p>
