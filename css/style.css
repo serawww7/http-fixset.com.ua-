@@ -205,7 +205,7 @@ main {
 .lead-form {
   display: flex;
   gap: 15px;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 30px;
   flex-wrap: wrap;
 }
@@ -270,6 +270,11 @@ main {
   padding-left: 10px;
   background: transparent;
   color: var(--text-dark);
+  caret-color: var(--text-dark);
+}
+
+.phone-field:not(.is-filled) .lead-input {
+  color: transparent;
 }
 
 .phone-field .lead-input:focus {
@@ -278,7 +283,7 @@ main {
 
 .phone-field__hint {
   position: absolute;
-  left: calc(10px + 2ch);
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   color: #b3b3b3;
@@ -291,6 +296,137 @@ main {
 
 .phone-field.is-filled .phone-field__hint {
   display: none;
+}
+
+.contact-method {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  order: 3;
+}
+
+.contact-method__legend {
+  padding: 0;
+  margin: 0 0 10px;
+  font-size: 0.95em;
+  font-weight: 600;
+  color: var(--deep-blue);
+}
+
+.contact-method__options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.contact-method__option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid #d5dee6;
+  border-radius: 999px;
+  background: var(--pristine-white);
+  color: var(--text-dark);
+  font-size: 0.92em;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+}
+
+.contact-method__option:hover {
+  border-color: var(--technical-cyan);
+}
+
+.contact-method__option:has(input:checked) {
+  border-color: #2AA5B6;
+  background: #EAF6F6;
+  box-shadow: 0 0 0 3px rgba(42, 165, 182, 0.12);
+}
+
+.contact-method__option input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: #2AA5B6;
+  cursor: pointer;
+}
+
+.lead-form > .btn {
+  order: 2;
+}
+
+.lead-form > .phone-field {
+  order: 1;
+}
+
+/* --- БЛОК: ПРО FIXSET --- */
+#about {
+  background-color: var(--pristine-white);
+  padding-top: 40px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.about-card {
+  background-color: var(--light-grey);
+  padding: 32px 28px;
+  border-radius: 15px;
+  border-bottom: 5px solid var(--deep-blue);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.55s ease, border-bottom-color 0.3s, box-shadow 0.3s;
+}
+
+.about-card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-card:nth-child(2).is-visible {
+  transition-delay: 0.1s;
+}
+
+.about-card:nth-child(3).is-visible {
+  transition-delay: 0.2s;
+}
+
+.about-card:hover {
+  border-bottom-color: var(--technical-cyan);
+  box-shadow: 0 8px 20px rgba(10, 37, 64, 0.08);
+}
+
+.about-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 18px;
+  border-radius: 12px;
+  background: rgba(0, 212, 255, 0.12);
+  color: #2AA5B6;
+}
+
+.about-card__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.about-card h3 {
+  margin: 0 0 12px;
+  font-size: 1.25em;
+}
+
+.about-card p {
+  margin: 0;
+  color: var(--text-dark);
+  line-height: 1.55;
 }
 
 /* --- БЛОК 2: ЛІД-МАГНІТ (АУДИТ) --- */
@@ -661,6 +797,7 @@ footer {
   width: 100%;
   margin: 0;
   font-size: 0.95em;
+  order: 4;
 }
 
 .lead-form__message.is-error {
@@ -795,6 +932,10 @@ footer {
   width: 100%;
 }
 
+.audit-modal__form .contact-method {
+  order: initial;
+}
+
 body.audit-modal-open {
   overflow: hidden;
 }
@@ -808,6 +949,16 @@ body.audit-modal-open {
 
   .hero-text h1 {
     font-size: 2.8em;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .about-grid .about-card:last-child {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 15px);
+    justify-self: center;
   }
 
   .audit-benefits,
@@ -867,10 +1018,16 @@ body.audit-modal-open {
   }
 
   .audit-benefits,
+  .about-grid,
   .reglament-grid,
   .tariffs-grid,
   .testimonials-grid {
     grid-template-columns: 1fr;
+  }
+
+  .about-grid .about-card:last-child {
+    grid-column: auto;
+    max-width: none;
   }
 
   .footer-content {
@@ -881,5 +1038,23 @@ body.audit-modal-open {
   .lead-input,
   .phone-field {
     width: 100%;
+  }
+
+  .lead-form > .btn {
+    order: 3;
+    width: 100%;
+  }
+
+  .lead-form .contact-method {
+    order: 2;
+  }
+
+  .contact-method__options {
+    gap: 8px;
+  }
+
+  .contact-method__option {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: flex-start;
   }
 }
