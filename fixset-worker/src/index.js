@@ -75,6 +75,17 @@ async function handleLead(request, env, corsHeaders) {
       ? body.site.trim()
       : "fixset.com.ua";
 
+  const contactMethodLabels = {
+    phone: "Дзвінок",
+    viber: "Viber",
+    telegram: "Telegram",
+    whatsapp: "WhatsApp",
+  };
+  const contactMethodRaw =
+    typeof body.contact_method === "string" ? body.contact_method.trim() : "";
+  const contact_method =
+    contactMethodLabels[contactMethodRaw] || contactMethodLabels.phone;
+
   const date = formatDate(new Date());
   const ip = getClientIp(request);
   const userAgent = request.headers.get("User-Agent") || "";
@@ -82,6 +93,8 @@ async function handleLead(request, env, corsHeaders) {
   const description = [
     "Телефон:",
     phone,
+    "Спосіб зв'язку:",
+    contact_method,
     "Сайт:",
     site,
     "Source:",
