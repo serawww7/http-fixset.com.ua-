@@ -246,7 +246,7 @@ main {
 .phone-field__prefix {
   flex-shrink: 0;
   padding-left: 20px;
-  color: #b3b3b3;
+  color: var(--text-dark);
   font-size: 1.1em;
   font-weight: 500;
   user-select: none;
