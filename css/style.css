@@ -379,6 +379,15 @@ main {
   order: 1;
 }
 
+.lead-form > .cf-turnstile {
+  order: 4;
+  width: 100%;
+}
+
+.audit-modal__form .cf-turnstile {
+  width: 100%;
+}
+
 /* --- БЛОК: ПРО FIXSET --- */
 #about {
   background-color: var(--pristine-white);
@@ -816,7 +825,7 @@ footer {
   width: 100%;
   margin: 0;
   font-size: 0.95em;
-  order: 4;
+  order: 5;
 }
 
 .lead-form__message.is-error {

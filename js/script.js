@@ -212,7 +212,7 @@
     delete button.dataset.originalText;
   };
 
-  const sendLead = async ({ phone, source, contact_method }) => {
+  const sendLead = async ({ phone, source, contact_method, turnstile_token }) => {
     const response = await fetch(LEAD_ENDPOINT, {
       method: 'POST',
       headers: {
@@ -223,6 +223,7 @@
         source,
         site: SITE_NAME,
         contact_method,
+        turnstile_token,
       }),
     });
 
@@ -233,6 +234,19 @@
     }
 
     return data;
+  };
+
+  const getTurnstileToken = (form) => {
+    const input = form.querySelector('[name="cf-turnstile-response"]');
+    return input && typeof input.value === 'string' ? input.value.trim() : '';
+  };
+
+  const resetTurnstile = (form) => {
+    const widget = form.querySelector('.cf-turnstile');
+    if (!widget || !window.turnstile || typeof window.turnstile.reset !== 'function') {
+      return;
+    }
+    window.turnstile.reset(widget);
   };
 
   const bindPhoneMask = (input) => {
@@ -492,6 +506,12 @@
 
       const selectedContact = form.querySelector('input[name="contact_method"]:checked');
       const contact_method = selectedContact ? selectedContact.value : 'phone';
+      const turnstile_token = getTurnstileToken(form);
+
+      if (!turnstile_token) {
+        showMessage(form, 'Підтвердіть, що ви не робот.', 'error');
+        return;
+      }
 
       form.dataset.submitting = 'true';
       setSubmitLoading(submitButton, true);
@@ -501,9 +521,11 @@
           phone: toApiPhone(phone),
           source,
           contact_method,
+          turnstile_token,
         });
 
         resetPhoneInput(input);
+        resetTurnstile(form);
         showSuccessToast();
 
         if (isModalForm) {
@@ -523,6 +545,7 @@
         }
       } catch (error) {
         showMessage(form, ERROR_MESSAGE, 'error');
+        resetTurnstile(form);
       } finally {
         form.dataset.submitting = 'false';
         setSubmitLoading(submitButton, false);

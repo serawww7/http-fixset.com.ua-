@@ -3,6 +3,8 @@ const ALLOWED_ORIGINS = [
   "https://www.fixset.com.ua",
 ];
 
+const TURNSTILE_HOSTNAMES = new Set(["fixset.com.ua", "www.fixset.com.ua"]);
+const TURNSTILE_ACTION = "lead";
 const TASK_NAME = "Новий лід із сайту FIXSET";
 
 export default {
@@ -69,6 +71,19 @@ async function handleLead(request, env, corsHeaders) {
     return json({ success: false, error: "phone is required" }, 400, corsHeaders);
   }
 
+  const turnstileToken =
+    typeof body.turnstile_token === "string" ? body.turnstile_token.trim() : "";
+  const ip = getClientIp(request);
+  const turnstileOk = await verifyTurnstile(turnstileToken, ip, env.TURNSTILE_SECRET);
+
+  if (!turnstileOk) {
+    return json(
+      { success: false, error: "Turnstile verification failed" },
+      403,
+      corsHeaders,
+    );
+  }
+
   const source = typeof body.source === "string" ? body.source.trim() : "";
   const site =
     typeof body.site === "string" && body.site.trim()
@@ -87,7 +102,6 @@ async function handleLead(request, env, corsHeaders) {
     contactMethodLabels[contactMethodRaw] || contactMethodLabels.phone;
 
   const date = formatDate(new Date());
-  const ip = getClientIp(request);
   const userAgent = request.headers.get("User-Agent") || "";
 
   const description = [
@@ -132,6 +146,56 @@ async function handleLead(request, env, corsHeaders) {
       502,
       corsHeaders,
     );
+  }
+}
+
+async function verifyTurnstile(token, remoteip, secret) {
+  if (
+    typeof token !== "string" ||
+    token.length === 0 ||
+    token.length > 2048 ||
+    typeof secret !== "string" ||
+    secret.length === 0
+  ) {
+    return false;
+  }
+
+  try {
+    const response = await fetch(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams({
+          secret,
+          response: token,
+          remoteip: remoteip || "",
+        }),
+      },
+    );
+
+    if (!response.ok) {
+      return false;
+    }
+
+    const result = await response.json().catch(() => null);
+    if (!result || result.success !== true) {
+      return false;
+    }
+
+    if (result.action !== TURNSTILE_ACTION) {
+      return false;
+    }
+
+    if (!TURNSTILE_HOSTNAMES.has(result.hostname)) {
+      return false;
+    }
+
+    return true;
+  } catch {
+    return false;
   }
 }
 
