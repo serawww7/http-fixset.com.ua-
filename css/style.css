@@ -446,9 +446,14 @@ main {
   height: 24px;
 }
 
-.about-card h3 {
+.about-card h2 {
   margin: 0 0 12px;
   font-size: 1.25em;
+  text-align: left;
+}
+
+.about-card h2::after {
+  display: none;
 }
 
 .about-card p {
@@ -787,10 +792,25 @@ footer {
   margin-bottom: 30px;
 }
 
-.footer-contacts h4,
-.footer-social h4 {
+.footer-contacts h2,
+.footer-social h2 {
   margin-top: 0;
+  margin-bottom: 1.33em;
   color: var(--deep-blue);
+  font-size: 1em;
+  text-align: left;
+}
+
+.footer-contacts h2::after,
+.footer-social h2::after {
+  display: none;
+}
+
+.testimonial-author h3 {
+  margin: 1.33em 0;
+  font-size: 1em;
+  color: inherit;
+  font-weight: 700;
 }
 
 .footer-contacts p,
