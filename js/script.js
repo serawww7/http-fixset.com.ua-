@@ -250,6 +250,8 @@
   };
 
   const bindPhoneMask = (input) => {
+    let pendingPaste = null;
+
     const clampCaret = () => {
       const start = input.selectionStart || 0;
       const end = input.selectionEnd || 0;
@@ -363,16 +365,11 @@
       }
     });
 
-    input.addEventListener('input', () => {
-      const caret = input.selectionStart || 0;
-      const editableBefore = countEditableBefore(input.value, caret);
-      applyPhoneValue(input, input.value, editableBefore);
-    });
-
     input.addEventListener('paste', (event) => {
-      event.preventDefault();
+      const clipboard = event.clipboardData || window.clipboardData;
+      if (!clipboard) return;
 
-      const pasted = (event.clipboardData || window.clipboardData).getData('text');
+      const pasted = clipboard.getData('text');
       const start = input.selectionStart || 0;
       const end = input.selectionEnd || 0;
       const digits = getEditableDigits(input.value);
@@ -381,7 +378,30 @@
       const editableAfter = countEditableBefore(input.value, end);
       const next = (digits.slice(0, editableBefore) + pastedDigits + digits.slice(editableAfter)).slice(0, 9);
 
-      applyPhoneValue(input, next, Math.min(next.length, editableBefore + pastedDigits.length));
+      pendingPaste = {
+        next,
+        caret: Math.min(next.length, editableBefore + pastedDigits.length),
+      };
+
+      setTimeout(() => {
+        if (!pendingPaste) return;
+        const pending = pendingPaste;
+        pendingPaste = null;
+        applyPhoneValue(input, pending.next, pending.caret);
+      }, 0);
+    });
+
+    input.addEventListener('input', () => {
+      if (pendingPaste) {
+        const { next, caret } = pendingPaste;
+        pendingPaste = null;
+        applyPhoneValue(input, next, caret);
+        return;
+      }
+
+      const caret = input.selectionStart || 0;
+      const editableBefore = countEditableBefore(input.value, caret);
+      applyPhoneValue(input, input.value, editableBefore);
     });
   };
 
