@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Сторінку не знайдено | FIXSET</title>
+  <meta name="robots" content="noindex,follow">
+  <meta name="theme-color" content="#154766">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="icon" href="images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      background-color: var(--light-grey);
+    }
+
+    .error-page__inner {
+      max-width: 560px;
+    }
+
+    .error-page__code {
+      font-size: 5em;
+      line-height: 1;
+      margin: 0 0 10px;
+      color: var(--deep-blue);
+    }
+
+    .error-page__title {
+      font-size: 1.6em;
+      margin: 0 0 16px;
+      color: var(--deep-blue);
+    }
+
+    .error-page__title::after {
+      display: none;
+    }
+
+    .error-page__text {
+      margin: 0 0 32px;
+      color: var(--text-dark);
+    }
+  </style>
+</head>
+<body>
+  <main class="error-page">
+    <div class="error-page__inner">
+      <h1 class="error-page__code">404</h1>
+      <h2 class="error-page__title">Сторінку не знайдено</h2>
+      <p class="error-page__text">Можливо, адреса була змінена або сторінка більше не існує.</p>
+      <a href="/" class="btn">Повернутися на головну</a>
+    </div>
+  </main>
+</body>
+</html>
