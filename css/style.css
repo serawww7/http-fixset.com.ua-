@@ -462,6 +462,15 @@ main {
   background-color: var(--pristine-white);
 }
 
+.audit-subtitle {
+  text-align: center;
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--deep-blue);
+  margin: 0 0 12px;
+  opacity: 0.75;
+}
+
 .audit-benefits {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
