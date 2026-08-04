@@ -597,7 +597,7 @@ table.comparison-table td:first-child {
 }
 
 .tariff-description {
-  color: #777;
+  color: var(--text-dark);
   margin-bottom: 25px;
   min-height: 40px;
   font-size: 0.9em;
@@ -612,7 +612,7 @@ table.comparison-table td:first-child {
 
 .tariff-price span {
   font-size: 0.4em;
-  color: #777;
+  color: var(--text-dark);
   font-weight: normal;
   display: block;
   margin-top: -5px;
