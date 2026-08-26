@@ -534,6 +534,86 @@ main {
   margin-bottom: 5px;
 }
 
+.reglament-actions {
+  margin-top: 40px;
+  text-align: center;
+}
+
+#services-page {
+  min-height: 60vh;
+}
+
+#services-page h1 {
+  text-align: center;
+}
+
+#services-page > .container > p {
+  max-width: 780px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.15em;
+}
+
+.services-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 40px 0;
+}
+
+.services-nav a {
+  padding: 8px 14px;
+  border: 1px solid #d5dee6;
+  border-radius: 20px;
+  color: var(--deep-blue);
+  text-decoration: none;
+  font-size: 0.9em;
+}
+
+.services-nav a:hover {
+  border-color: #2AA5B6;
+  background: #EAF6F6;
+}
+
+.services-catalog {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 30px;
+}
+
+.services-category {
+  padding: 30px;
+  background: var(--light-grey);
+  border-bottom: 5px solid var(--deep-blue);
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+}
+
+.services-category h2 {
+  margin: 0 0 18px;
+  font-size: 1.35em;
+  text-align: left;
+}
+
+.services-category h2::after {
+  display: none;
+}
+
+.services-category ul {
+  margin: 0;
+  padding-left: 22px;
+}
+
+.services-category li {
+  padding: 5px 0;
+}
+
+.services-cta {
+  margin-top: 40px;
+  text-align: center;
+}
+
 
 /* --- БЛОК 4: ПОРІВНЯННЯ --- */
 #comparison {
@@ -1091,6 +1171,14 @@ body.audit-modal-open {
   .footer-content {
     flex-direction: column;
     gap: 24px;
+  }
+
+  .services-catalog {
+    grid-template-columns: 1fr;
+  }
+
+  .services-nav {
+    justify-content: flex-start;
   }
 
   .lead-input,
