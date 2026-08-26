@@ -406,6 +406,35 @@
   };
 
   const modal = document.getElementById('audit-modal');
+  const serviceModal = document.getElementById('service-modal');
+  const serviceModalTitle = document.getElementById('service-modal-title');
+  const serviceModalList = document.getElementById('service-modal-list');
+  const serviceDetails = {
+    'disk-diagnostics': {
+      title: 'Миттєва діагностика дисків',
+      items: ['Діагностика', 'Перевірка дисків', 'Відновлення після збоїв', 'Відновлення даних'],
+    },
+    backup: {
+      title: 'Безпечне резервне копіювання',
+      items: ['Резервне копіювання', 'Налаштування резервного копіювання'],
+    },
+    security: {
+      title: 'Захист від шифрувальників',
+      items: ['ESET', 'Zillya', 'Видалення вірусів', 'Видалення рекламного ПЗ', 'Видалення майнерів', 'Очищення системи', 'Захист від шифрувальників'],
+    },
+    'system-optimization': {
+      title: 'Оптимізація систем',
+      items: ['Оптимізація швидкодії', 'Модернізація', 'Заміна комплектуючих', 'Встановлення SSD', 'Перенесення Windows'],
+    },
+    peripherals: {
+      title: 'Налаштування периферії',
+      items: ['Підключення техніки', 'Підключення обладнання', 'Підключення по мережі', 'Підключення Wi‑Fi', 'Налаштування'],
+    },
+    'business-software': {
+      title: 'Підтримка M.E.Doc, BAS, УкрСклад та інших програм',
+      items: ['M.E.Doc', 'Кашалот ПРРО', 'КЕП', 'Windows', 'Microsoft Office', 'Драйвери', 'Спеціалізовані програми', 'Встановлення', 'Оновлення', 'Налаштування', 'Перенесення баз', 'Відновлення роботи', 'Консультації'],
+    },
+  };
   const modalForm = modal ? modal.querySelector('[data-audit-modal-form]') : null;
   const modalPhone = modalForm ? modalForm.querySelector('input[name="phone"]') : null;
   let modalSource = '';
@@ -444,6 +473,34 @@
     }
   };
 
+  const openServiceModal = (serviceId) => {
+    const service = serviceDetails[serviceId];
+    if (!serviceModal || !service) return;
+    serviceModalTitle.textContent = service.title;
+    serviceModalList.replaceChildren(...service.items.map((item) => {
+      const li = document.createElement('li');
+      li.textContent = item;
+      return li;
+    }));
+    serviceModal.hidden = false;
+    serviceModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('service-modal-open');
+  };
+
+  const closeServiceModal = () => {
+    if (!serviceModal) return;
+    serviceModal.hidden = true;
+    serviceModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('service-modal-open');
+  };
+
+  document.querySelectorAll('[data-service]').forEach((trigger) => {
+    trigger.addEventListener('click', () => openServiceModal(trigger.dataset.service));
+  });
+  document.querySelectorAll('[data-close-service-modal]').forEach((el) => {
+    el.addEventListener('click', closeServiceModal);
+  });
+
   const closeModal = () => {
     if (!modal) return;
     modal.hidden = true;
@@ -478,6 +535,10 @@
   });
 
   document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && serviceModal && !serviceModal.hidden) {
+      closeServiceModal();
+      return;
+    }
     if (event.key === 'Escape' && modal && !modal.hidden) {
       closeModal();
     }

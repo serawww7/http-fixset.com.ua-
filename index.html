@@ -144,6 +144,7 @@
             <div class="reglament-text">
               <h3>Миттєва діагностика дисків</h3>
               <p>Запобігаємо втраті важливих даних.</p>
+              <button type="button" class="service-details-btn" data-service="disk-diagnostics">Детальніше</button>
             </div>
           </div>
           <div class="reglament-item">
@@ -151,6 +152,7 @@
             <div class="reglament-text">
               <h3>Безпечне резервне копіювання</h3>
               <p>Можливість відновити базу за лічені хвилини.</p>
+              <button type="button" class="service-details-btn" data-service="backup">Детальніше</button>
             </div>
           </div>
           <div class="reglament-item">
@@ -158,6 +160,7 @@
             <div class="reglament-text">
               <h3>Захист від шифрувальників</h3>
               <p>Повний контроль та безпека ваших фінансів.</p>
+              <button type="button" class="service-details-btn" data-service="security">Детальніше</button>
             </div>
           </div>
           <div class="reglament-item">
@@ -165,6 +168,7 @@
             <div class="reglament-text">
               <h3>Оптимізація систем</h3>
               <p>Запобігаємо «зависанню» комп'ютерів.</p>
+              <button type="button" class="service-details-btn" data-service="system-optimization">Детальніше</button>
             </div>
           </div>
           <div class="reglament-item">
@@ -172,6 +176,7 @@
             <div class="reglament-text">
               <h3>Налаштування периферії</h3>
               <p>Безперебійна робота офісної техніки.</p>
+              <button type="button" class="service-details-btn" data-service="peripherals">Детальніше</button>
             </div>
           </div>
           <div class="reglament-item">
@@ -179,6 +184,7 @@
             <div class="reglament-text">
               <h3>Підтримка M.E.Doc, BAS, УкрСклад та інших програм</h3>
               <p>Оперативна допомога бухгалтерії та користувачам.</p>
+              <button type="button" class="service-details-btn" data-service="business-software">Детальніше</button>
             </div>
           </div>
         </div>
@@ -342,6 +348,15 @@
       </div>
     </div>
   </footer>
+
+  <div class="service-modal" id="service-modal" hidden aria-hidden="true">
+    <div class="service-modal__overlay" data-close-service-modal></div>
+    <div class="service-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
+      <button type="button" class="service-modal__close" data-close-service-modal aria-label="Закрити">×</button>
+      <h2 id="service-modal-title"></h2>
+      <ul class="service-modal__list" id="service-modal-list"></ul>
+    </div>
+  </div>
 
   <div class="audit-modal" id="audit-modal" hidden aria-hidden="true">
     <div class="audit-modal__overlay" data-close-audit-modal></div>
