@@ -1117,6 +1117,10 @@ body.audit-modal-open {
 }
 
 @media (max-width: 768px) {
+  main {
+    margin-top: 150px;
+  }
+
   section {
     padding: 70px 0;
   }
