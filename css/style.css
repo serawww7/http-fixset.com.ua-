@@ -1121,6 +1121,14 @@ body.audit-modal-open {
     margin-top: 150px;
   }
 
+  body:has(#services-page) header {
+    display: none;
+  }
+
+  body:has(#services-page) main {
+    margin-top: 0;
+  }
+
   section {
     padding: 70px 0;
   }
